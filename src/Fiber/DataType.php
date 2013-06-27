@@ -5,8 +5,8 @@ namespace Fiber;
 abstract class DataType
 {
     
-    private $options = array();
-    private $params = array();
+    protected $options = array();
+    protected $params = array();
 
 
     public function __construct(array $options = null)
@@ -36,7 +36,6 @@ abstract class DataType
         $i    = 0;
 
         foreach ($this->options as $key => $opt) {
-            echo "fisk";
             if (true === $opt["active"] && isset($opt["action"])) {
                 $call = $opt["action"];
                 if (method_exists($this, $call)) {
@@ -60,6 +59,4 @@ abstract class DataType
 
         return $data;
     }
-
-    
 }
