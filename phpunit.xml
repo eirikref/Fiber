@@ -1,0 +1,9 @@
+<phpunit colors="true"
+         bootstrap="phpunit-bootstrap.php"
+         verbose="true">
+  <testsuites>
+    <testsuite name="Loom">
+      <directory>tests/phpunit/</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
