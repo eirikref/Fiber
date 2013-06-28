@@ -94,6 +94,23 @@ abstract class DataType
 
 
     /**
+     * Get generated test data
+     *
+     * Default implementation. Override in subclasses as necessary.
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-06-28
+     * @access public
+     * @return array
+     */
+    public function get()
+    {
+        return $this->generateArray();
+    }
+
+
+
+    /**
      * Generate the array to be returned
      *
      * Generic generator of the data we want to return.
