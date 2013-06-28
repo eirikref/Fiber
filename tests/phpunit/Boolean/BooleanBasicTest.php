@@ -1,6 +1,6 @@
 <?php
 
-class BasicTest extends PHPUnit_Framework_TestCase
+class BooleanBasicTest extends PHPUnit_Framework_TestCase
 {
 
     public function testBooleanSingleParam()

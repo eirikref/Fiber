@@ -40,6 +40,6 @@ class Object extends DataType
      */
     public function getObject()
     {
-        return new StdClass();
+        return new \stdClass();
     }
 }
