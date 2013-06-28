@@ -140,7 +140,7 @@ abstract class DataType
                             }
                         }
                     } else {
-                        $data[$i] = $ret;
+                        $data[$i][] = $ret;
                     }
                 }
             }
