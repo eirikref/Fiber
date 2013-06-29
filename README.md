@@ -39,9 +39,8 @@ dataProvider methods.
   that are either all valid or all invalid (in the context of what I
   have asked for).
 
-
-## Usage Scenarios
-
-```php
-$generator = new \Fiber\String();
-```
+* Thoughts on what I need the String class to provide: empty string,
+  strings of different length (not yet sure if I should provide
+  certain default lengths or what), strings that are obviously too
+  long, options should probably have a min/max length setting,
+  all lowercase, all uppercase

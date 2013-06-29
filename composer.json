@@ -1,4 +1,5 @@
 {
+    "name": "eirikref/Fiber",
     "autoload": {
         "psr-0": {
             "Fiber\\": "src/" 
