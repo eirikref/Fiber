@@ -2,37 +2,92 @@
 
 namespace Fiber\Tests\DataType;
 
+class DummyDataType extends \Fiber\DataType
+{
+    protected $options = array("foo" => array("active" => true,
+                                              "action" => "getFoo"),
+                               "bar" => array("active" => true,
+                                              "action" => "getBar")
+                               );
+    
+    public function getFoo()
+    {
+        return "foo";
+    }
+
+    public function getBar()
+    {
+        return "bar";
+    }
+}
+
+
 class GenerateArrayTest extends \PHPUnit_Framework_TestCase
 {
     
     /**
-     * Test that setOptions() ignore non-existant items
-     *
-     * We use reflection to manipulate our way to a mock with proper
-     * $this->options from the get-go, try to change an item, and then
-     * use reflection again to check that the variable has been not
-     * been set.
+     * Test simple data generation without "params" settings in
+     * $options
      *
      * @test
      */
-    public function setOptionsThatDoNotExist()
+    public function getDataWithoutParams()
     {
-    //     $before = array("first"  => array("active" => true,
-    //                                       "action" => "doSomething"),
-    //                     "second" => array("active" => true,
-    //                                       "action" => "doAnything"));
-    //     $opts   = array("third"  => array("active" => false,
-    //                                       "action" => "doNothing"));
+        $exp = array(array("foo"),
+                     array("bar"));
 
-    //     $gen  = $this->getMockForAbstractClass("\Fiber\DataType");
+        $dummy = new DummyDataType();
+        $this->assertEquals($exp, $dummy->get());
+    }
 
-    //     $prop = new \ReflectionProperty($gen, "options");
-    //     $prop->setAccessible(true);
-    //     $prop->setValue($gen, $before);
 
-    //     $gen->setOptions($opts);
-    //     $this->assertEquals($before, $prop->getValue($gen));
-    // }
-    //     $gen->get();
+
+    /**
+     * Test data generation with correct use of "params"
+     *
+     * @test
+     */
+    public function testCorrectParamsUse()
+    {
+        $exp = array(array("test", "foo"),
+                     array("test", "bar"));
+        $opt = array("params" => array("test", "__GEN__"));
+
+        $dummy = new DummyDataType($opt);
+        $this->assertEquals($exp, $dummy->get());
+    }
+
+
+
+    /**
+     * Test data generation with strange use of "params"
+     *
+     * @test
+     */
+    public function testParamsJustGen()
+    {
+        $exp = array(array("foo"),
+                     array("bar"));
+        $opt = array("params" => array("__GEN__"));
+
+        $dummy = new DummyDataType($opt);
+        $this->assertEquals($exp, $dummy->get());
+    }
+
+
+    /**
+     * Test data generation with strange use of "params"
+     *
+     * @test
+     */
+    public function testParamsJustText()
+    {
+        $exp = array(array("test"),
+                     array("test"));
+        $opt = array("params" => array("test"));
+
+        $dummy = new DummyDataType($opt);
+        $this->assertEquals($exp, $dummy->get());
     }
 }
+
