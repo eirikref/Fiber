@@ -121,32 +121,21 @@ abstract class DataType
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-27
-     * @access public
+     * @access private
      * @return array
      */
-    public function generateArray()
+    private function generateArray()
     {
-        $data         = array();
-        $i            = 0;
-        $actionMaxLen = 32;
+        $data = array();
+        $i    = 0;
 
         foreach ($this->options as $key => $opt) {
-            if (!isset($opt["active"]) || true !== $opt["active"]) {
-                continue;
-            }
-
-            if (!isset($opt["action"]) || !is_string($opt["action"]) ||
-                strlen($opt["action"]) < 1 ||
-                strlen($opt["action"]) > $actionMaxLen) {
+            if (!$this->validateItem($opt)) {
                 continue;
             }
 
             $call = $opt["action"];
-            if (!method_exists($this, $call)) {
-                continue;
-            }
-
-            $ret = $this->{$call}();
+            $ret  = $this->{$call}();
             
             if (count($this->params) > 0) {
                 foreach ($this->params as $val) {
@@ -163,5 +152,43 @@ abstract class DataType
         }
 
         return $data;
+    }
+
+
+
+    /**
+     * Validate options entry
+     *
+     * Validate a single item in the $this->options array
+     *
+     * FIXME: Refactor to have better error handling, with finer
+     * granularity
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-06-30
+     * @access private
+     * @return boolean
+     *
+     * @param  array $item
+     */
+    private function validateItem(array $item)
+    {
+        $maxLen = 32;
+
+        if (!isset($item["active"]) || true !== $item["active"]) {
+            return false;
+        }
+        
+        if (!isset($item["action"]) || !is_string($item["action"]) ||
+            strlen($item["action"]) < 1 ||
+            strlen($item["action"]) > $maxLen) {
+            return false;
+        }
+        
+        if (!method_exists($this, $item["action"])) {
+            return false;
+        }
+
+        return true;
     }
 }

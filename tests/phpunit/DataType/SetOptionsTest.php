@@ -30,21 +30,18 @@ class DataTypeTest extends \PHPUnit_Framework_TestCase
      * This may be seriously unnecessary since the method signature
      * already checks that $options is an array. But... oh well.
      *
+     * @test
      * @expectedException PHPUnit_Framework_Error
      * @dataProvider      getNonArrayParams
      */
-    public function testWithNonArrayParams($param)
+    public function setOptionsWithInvalidParams($param)
     {
         $gen = $this->getMockForAbstractClass("\Fiber\DataType");
         $gen->setOptions($param);
     }
 
-    // 1. Setting options that exist
-    // 2.                 that DO NOT exist
-    // 3. Setting params
 
-    
-    
+
     /**
      * Test that using setOptions() to change values actually work.
      *
@@ -134,16 +131,4 @@ class DataTypeTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals($exp, $prop->getValue($gen));
     }
-
-    
-    // public function testConstructor()
-    // {
-    //     $gen = $this->getMockForAbstractClass("\Fiber\DataType");
-    //     $ref = new \ReflectionProperty($gen, "options");
-    //     $ref->setAccessible(true);
-    //     $ref->setValue($gen, array("fisk"));
-    //     // Cprint_r($gen);
-
-    //     $gen->get();
-    // }
 }
