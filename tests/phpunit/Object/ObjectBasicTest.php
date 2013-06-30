@@ -3,6 +3,9 @@
 class ObjectBasicTest extends PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @covers \Fiber\Object
+     */
     public function testObjectSingleParam()
     {
         $exp       = array(array(new stdClass()));
@@ -13,6 +16,9 @@ class ObjectBasicTest extends PHPUnit_Framework_TestCase
 
 
 
+    /**
+     * @covers \Fiber\Object
+     */
     public function testObjectTwoParams()
     {
         $exp       = array(array("test", new stdClass()));
@@ -24,6 +30,9 @@ class ObjectBasicTest extends PHPUnit_Framework_TestCase
 
 
 
+    /**
+     * @covers \Fiber\Object
+     */
     public function testObjectMultipleParams()
     {
         $exp       = array(array("test", new stdClass(), "foo", "bar"));

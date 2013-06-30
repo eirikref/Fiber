@@ -59,7 +59,7 @@ abstract class DataType
      */
     public function __construct(array $options = null)
     {
-        if (is_array($options)) {
+        if (isset($options)) {
             $this->setOptions($options);
         }
     }
@@ -72,6 +72,10 @@ abstract class DataType
      * Parse run-time options and update $this->options. The reserved
      * key "params" is used for passing configuration regarding the
      * list of array parameters.
+     *
+     * FIXME: Just setting $options[$key] to $value is not really
+     * robust, is it? If I end up exposing this to end-users, the
+     * potential for errors is huge.
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-27
@@ -122,27 +126,38 @@ abstract class DataType
      */
     public function generateArray()
     {
-        $data = array();
-        $i    = 0;
+        $data         = array();
+        $i            = 0;
+        $actionMaxLen = 32;
 
         foreach ($this->options as $key => $opt) {
-            if (true === $opt["active"] && isset($opt["action"])) {
-                $call = $opt["action"];
-                if (method_exists($this, $call)) {
-                    $ret = $this->{$call}();
+            if (!isset($opt["active"]) || true !== $opt["active"]) {
+                continue;
+            }
 
-                    if (count($this->params) > 0) {
-                        foreach ($this->params as $val) {
-                            if ("__GEN__" == $val) {
-                                $data[$i][] = $ret;
-                            } else {
-                                $data[$i][] = $val;
-                            }
-                        }
-                    } else {
+            if (!isset($opt["action"]) || !is_string($opt["action"]) ||
+                strlen($opt["action"]) < 1 ||
+                strlen($opt["action"]) > $actionMaxLen) {
+                continue;
+            }
+
+            $call = $opt["action"];
+            if (!method_exists($this, $call)) {
+                continue;
+            }
+
+            $ret = $this->{$call}();
+            
+            if (count($this->params) > 0) {
+                foreach ($this->params as $val) {
+                    if ("__GEN__" == $val) {
                         $data[$i][] = $ret;
+                    } else {
+                        $data[$i][] = $val;
                     }
                 }
+            } else {
+                $data[$i][] = $ret;
             }
             ++$i;
         }
