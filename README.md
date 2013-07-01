@@ -46,3 +46,34 @@ dataProvider methods.
   certain default lengths or what), strings that are obviously too
   long, options should probably have a min/max length setting,
   all lowercase, all uppercase
+
+* Not quite sure if I should do everything through a central
+  class/object `Fiber`, through separate classes (ie. `String`,
+  `Boolean`, etc), or both.
+
+* Not quite sure if I should use static methods,
+  ie. `String::getSomething()`, or if I should use objects.
+
+* Not quite sure about the format of `$this->options`, and how I will
+  let users configure what they want. Needs to be flexible, but still
+  robust. Unlike how it is now.
+
+* I should probably support configuration for both the central `Fiber`
+  and the subclasses, and if I pass configuration to `Fiber` the
+  relevant parts should be delegated to the subclasses.
+
+* Even if I support a simple, yet flexible way of configuring
+  everything, I guess I should still supply a nice set of helper
+  methods for accessing common things without having to pass a lot of
+  configuration.
+
+
+## Thoughts on Possible Usage
+
+```php
+Fiber::getString();
+String::getSomething();
+
+$fiber = new \Fiber\Fiber();
+$fiber->getStuff();
+´´´
