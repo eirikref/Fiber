@@ -85,6 +85,6 @@ $data = Fiber::get($cfg);
 // Only include integers and floats
 $cfg  = '{"include": "integer, float"}';
 $data = Fiber::get($cfg);
-´´´
+```
 
 Test
