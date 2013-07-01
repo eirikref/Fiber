@@ -1,4 +1,4 @@
-# Fiber <a style="float: right;" href="http://travis-ci.org/eirikref/Fiber"><img src="https://secure.travis-ci.org/eirikref/Fiber.png?branch=master"></a>
+# Fiber <a style="float: right;" href="http://travis-ci.org/eirikref/Fiber"><img style="float: right;" src="https://secure.travis-ci.org/eirikref/Fiber.png?branch=master"></a>
 
 Fiber is work-in-progress, or maybe just a dream-in-progress at this
 point. It is supposed to become a simple, small library for generating
