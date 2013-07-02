@@ -26,11 +26,14 @@ optional:
    below.
 
 3. A special case parameter `value`, which is used for fields that
-   should not be generated ut just have the same value for every item
+   should not be generated but just have the same value for every item
    in the set of generated data. Ie. a string, an int, a boolean
    `true`, etc.
 
 ### Examples
+
+Generate a list with one parameter per element, and that parameter
+should be of types string, int, and float.
 
 ```json
 [
@@ -38,12 +41,30 @@ optional:
 ]
 ```
 
+```php
+array(array("include" => array("string", "int", "float")));
+```
+
+
+A list with two parameters per element; the first one consisting of
+all kinds of objects and arrays, the other of all kinds of strings.
+
 ```json
 [
     {"exclude": ["object", "array"]},
     {"include": ["string"]}
 ]
 ```
+
+```php
+array(array("exclude" => array("object", "array")),
+      array("include" => array("string"))
+     );
+```
+
+Generate a set with just a single parameter per element. The element
+should contain all kinds of string and int, and we supply module
+specific configuration for both strings and ints.
 
 ```json
 [
@@ -54,6 +75,19 @@ optional:
     }
 ]
 ```
+
+```php
+array(array("exclude" => array("object", "array"),
+            "string"  => array( ... ),
+            "int"     => array( ... )
+           )
+     );
+```
+
+Generate a set with three parameters; the first one is the static
+string `some text` for all elements, the second one is a set of all
+kinds of strings (depending on the module specific configuration
+provided), and the last one is an int which iss always `12`.
 
 ```json
 [
@@ -69,6 +103,16 @@ optional:
     }
 ]
 ```
+
+```php
+array(array("value"   => "some text"),
+      array("include" => array("string"),
+            "string"  => array( ... )
+           ),
+      array("value"   => 12)
+     );
+```
+
 
 ## Module Specific Configuration
 
