@@ -6,7 +6,7 @@ class BooleanBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Boolean
      */
-    public function testBooleanSingleParam()
+    public function singleParam()
     {
         $exp       = array(array(true),
                            array(false));
@@ -20,7 +20,7 @@ class BooleanBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Boolean
      */
-    public function testBooleanTwoParams()
+    public function twoParams()
     {
         $exp       = array(array("test", true),
                            array("test", false));
@@ -35,7 +35,7 @@ class BooleanBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Boolean
      */
-    public function testBooleanMultipleParams()
+    public function multipleParams()
     {
         $exp       = array(array("test", true, "foo", "bar"),
                            array("test", false, "foo", "bar"));

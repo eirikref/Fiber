@@ -30,7 +30,7 @@ class DataTypeTest extends \PHPUnit_Framework_TestCase
      * This may be seriously unnecessary since the method signature
      * already checks that $options is an array. But... oh well.
      *
-     * @test
+     * @Xtest
      * @expectedException PHPUnit_Framework_Error
      * @dataProvider      getNonArrayParams
      */
@@ -50,7 +50,7 @@ class DataTypeTest extends \PHPUnit_Framework_TestCase
      * use reflection again to check that the variable has been
      * changed.
      *
-     * @test
+     * @Xtest
      */
     public function setOptionsThatExist()
     {
@@ -85,7 +85,7 @@ class DataTypeTest extends \PHPUnit_Framework_TestCase
      * use reflection again to check that the variable has been not
      * been set.
      *
-     * @test
+     * @Xtest
      */
     public function setOptionsThatDoNotExist()
     {
@@ -115,7 +115,7 @@ class DataTypeTest extends \PHPUnit_Framework_TestCase
      * reflection to check that $this->params has been set
      * accordingly.
      *
-     * @test
+     * @Xtest
      */
     public function setParams()
     {

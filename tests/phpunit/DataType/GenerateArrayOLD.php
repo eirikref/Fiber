@@ -29,7 +29,7 @@ class GenerateArrayTest extends \PHPUnit_Framework_TestCase
      * Test simple data generation without "params" settings in
      * $options
      *
-     * @test
+     * @Xtest
      */
     public function getDataWithoutParams()
     {
@@ -45,9 +45,9 @@ class GenerateArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * Test data generation with correct use of "params"
      *
-     * @test
+     * @Xtest
      */
-    public function testCorrectParamsUse()
+    public function correctParamsUse()
     {
         $exp = array(array("test", "foo"),
                      array("test", "bar"));
@@ -62,9 +62,9 @@ class GenerateArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * Test data generation with strange use of "params"
      *
-     * @test
+     * @Xtest
      */
-    public function testParamsJustGen()
+    public function paramsJustGen()
     {
         $exp = array(array("foo"),
                      array("bar"));
@@ -78,9 +78,9 @@ class GenerateArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * Test data generation with strange use of "params"
      *
-     * @test
+     * @Xtest
      */
-    public function testParamsJustText()
+    public function paramsJustText()
     {
         $exp = array(array("test"),
                      array("test"));

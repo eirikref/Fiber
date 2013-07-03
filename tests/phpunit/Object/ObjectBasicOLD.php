@@ -6,7 +6,7 @@ class ObjectBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Object
      */
-    public function testObjectSingleParam()
+    public function singleParam()
     {
         $exp       = array(array(new stdClass()));
         $generator = new \Fiber\Object();
@@ -19,7 +19,7 @@ class ObjectBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Object
      */
-    public function testObjectTwoParams()
+    public function twoParams()
     {
         $exp       = array(array("test", new stdClass()));
         $opts      = array("params" => array("test", "__GEN__"));
@@ -33,7 +33,7 @@ class ObjectBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Object
      */
-    public function testObjectMultipleParams()
+    public function multipleParams()
     {
         $exp       = array(array("test", new stdClass(), "foo", "bar"));
         $opts      = array("params" => array("test", "__GEN__", "foo", "bar"));

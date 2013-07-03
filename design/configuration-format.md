@@ -118,7 +118,7 @@ array(array("value"   => "some text"),
 
 It is also possible to generate test data for a single module
 (ie. similar to passing config with `"include": "string"`) by calling
-`get()` on the module itself (ie. `String::get()`.
+`get()` on the module itself (ie. `String::get()`).
 
 Configuration may also be called for these calls, but
 `include/exclude` will of course be ignored, and the same goes for

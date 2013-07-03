@@ -6,7 +6,7 @@ class NullBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Null
      */
-    public function testNullSingleParam()
+    public function singleParam()
     {
         $exp       = array(array(null));
         $generator = new \Fiber\Null();
@@ -19,7 +19,7 @@ class NullBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Null
      */
-    public function testNullTwoParams()
+    public function twoParams()
     {
         $exp       = array(array("test", null));
         $opts      = array("params" => array("test", "__GEN__"));
@@ -33,7 +33,7 @@ class NullBasicTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Fiber\Null
      */
-    public function testNullMultipleParams()
+    public function multipleParams()
     {
         $exp       = array(array("test", null, "foo", "bar"));
         $opts      = array("params" => array("test", "__GEN__", "foo", "bar"));

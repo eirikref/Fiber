@@ -30,7 +30,7 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      * This may be seriously unnecessary since the method signature
      * already checks that $options is an array. But... oh well.
      *
-     * @test
+     * @Xtest
      * @expectedException PHPUnit_Framework_Error
      * @dataProvider      getNonArrayParams
      */
@@ -42,7 +42,7 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @test
+     * @Xtest
      * @covers \Fiber\Datatype::__construct
      */
     public function ConstructorWithValidParam()

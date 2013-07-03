@@ -56,10 +56,10 @@ class ValidateItemInvalid extends \PHPUnit_Framework_TestCase
     /**
      * Test all kinds of invalid option items
      *
-     * @test
+     * @Xtest
      * @dataProvider getInvalidOptionsItems
      */
-    public function testInvalidOptionsItems($item)
+    public function invalidOptionsItems($item)
     {
         $this->assertFalse($this->prop->invokeArgs($this->gen, array($item)));
     }
@@ -69,9 +69,9 @@ class ValidateItemInvalid extends \PHPUnit_Framework_TestCase
     /**
      * Test single valid
      *
-     * @test
+     * @Xtest
      */
-    public function testValidOptionsItem()
+    public function validOptionsItem()
     {
         $item = array("active" => true, 
                       "action" => "setOptions");

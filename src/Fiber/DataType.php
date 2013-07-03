@@ -12,39 +12,20 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-06-28
+ * @version 2013-07-03
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType
 {
     
     /**
-     * Options for the data this datatype will generate. Meant to be
-     * populated inside each subclass as configuration with defaults,
-     * and possible to enable/disble either through the constructor or
-     * setOptions().
+     * User supplied configuration with parameters for generating test
+     * data
      *
-     * @var    array $options
+     * @var    array $config
      * @access protected
      */
-    protected $options = array();
-
-    /**
-     * Data structure used for storing optional list of parameters in
-     * the arrays we will generate. Ie. when we want a set of items
-     * like 'array("test.test", <generated data>)', where "test.test"
-     * is the same for all items, but <generated data> varies from
-     * item to item and contains the set of strings, ints, floats,
-     * etc. that we generate.
-     *
-     * FIXME: Currently the parameter "__GEN__" as a placeholder for
-     * the automatically generated entry, which is just a temporary
-     * hack. I guess.
-     *
-     * @var    array $params
-     * @access private
-     */
-    protected $params = array();
+    protected $config = array();
 
 
 
@@ -55,44 +36,87 @@ abstract class DataType
      * @since  2013-06-27
      * @access public
      *
-     * @param  array $options Run-time settings
+     * @param  mixed $config Generator configuration
      */
-    public function __construct(array $options = null)
+    public function __construct($config = null)
     {
-        if (isset($options)) {
-            $this->setOptions($options);
+        if (isset($config)) {
+            $this->setConfig($config);
         }
     }
 
 
 
     /**
-     * Set options
+     * Set configuration
      *
-     * Parse run-time options and update $this->options. The reserved
-     * key "params" is used for passing configuration regarding the
-     * list of array parameters.
-     *
-     * FIXME: Just setting $options[$key] to $value is not really
-     * robust, is it? If I end up exposing this to end-users, the
-     * potential for errors is huge.
+     * Set configuration for the data generator. $config needs to be
+     * either a PHP array or a JSON array, as defined by the format
+     * found at
+     * https://github.com/eirikref/Fiber/blob/master/design/configuration-format.md
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-27
      * @access public
      * @return void
      *
-     * @param  array $options Run-time settings
+     * @param  mixed $config Generator config
      */
-    public function setOptions(array $options)
+    public function setConfig($input)
     {
-        foreach ($options as $key => $value) {
-            if (isset($this->options[$key])) {
-                $this->options[$key] = $value;
-            } elseif ("params" == $key) {
-                $this->params = $value;
-            }
+        if ($this->isJson($input)) {
+            $input = json_decode($input, true);
         }
+
+        try {
+            $this->validateConfig($input);
+            $this->config = $input;
+        } catch (\Exception $e) {
+            // Do something
+            echo "huffda\n";
+        }
+    }
+
+
+
+    /**
+     * Check if passed string is JSON
+     *
+     * FIXME: This should not really be here (it should not have to),
+     * but for now there just isn't a better place for it.
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-03
+     * @access private
+     * @return boolean
+     *
+     * @param  string $json JSON data
+     */
+    private function isJson($json)
+    {
+        if (!is_string($json)) {
+            return false;
+        }
+
+        json_decode($json);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+
+
+
+    /**
+     * Validate configuration array
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-03
+     * @access private
+     * @return boolean
+     *
+     * @param  array $config Configuration data
+     */
+    private function validateConfig(array $config)
+    {
+        
     }
 
 
@@ -109,7 +133,7 @@ abstract class DataType
      */
     public function get()
     {
-        return $this->generateArray();
+        // return $this->generateArray();
     }
 
 
@@ -124,35 +148,35 @@ abstract class DataType
      * @access private
      * @return array
      */
-    private function generateArray()
-    {
-        $data = array();
-        $i    = 0;
+    // private function generateArray()
+    // {
+    //     $data = array();
+    //     $i    = 0;
 
-        foreach ($this->options as $key => $opt) {
-            if (!$this->validateItem($opt)) {
-                continue;
-            }
+    //     foreach ($this->options as $key => $opt) {
+    //         if (!$this->validateItem($opt)) {
+    //             continue;
+    //         }
 
-            $call = $opt["action"];
-            $ret  = $this->{$call}();
+    //         $call = $opt["action"];
+    //         $ret  = $this->{$call}();
             
-            if (count($this->params) > 0) {
-                foreach ($this->params as $val) {
-                    if ("__GEN__" == $val) {
-                        $data[$i][] = $ret;
-                    } else {
-                        $data[$i][] = $val;
-                    }
-                }
-            } else {
-                $data[$i][] = $ret;
-            }
-            ++$i;
-        }
+    //         if (count($this->params) > 0) {
+    //             foreach ($this->params as $val) {
+    //                 if ("__GEN__" == $val) {
+    //                     $data[$i][] = $ret;
+    //                 } else {
+    //                     $data[$i][] = $val;
+    //                 }
+    //             }
+    //         } else {
+    //             $data[$i][] = $ret;
+    //         }
+    //         ++$i;
+    //     }
 
-        return $data;
-    }
+    //     return $data;
+    // }
 
 
 
@@ -171,24 +195,24 @@ abstract class DataType
      *
      * @param  array $item
      */
-    private function validateItem(array $item)
-    {
-        $maxLen = 32;
+    // private function validateItem(array $item)
+    // {
+    //     $maxLen = 32;
 
-        if (!isset($item["active"]) || true !== $item["active"]) {
-            return false;
-        }
+    //     if (!isset($item["active"]) || true !== $item["active"]) {
+    //         return false;
+    //     }
         
-        if (!isset($item["action"]) || !is_string($item["action"]) ||
-            strlen($item["action"]) < 1 ||
-            strlen($item["action"]) > $maxLen) {
-            return false;
-        }
+    //     if (!isset($item["action"]) || !is_string($item["action"]) ||
+    //         strlen($item["action"]) < 1 ||
+    //         strlen($item["action"]) > $maxLen) {
+    //         return false;
+    //     }
         
-        if (!method_exists($this, $item["action"])) {
-            return false;
-        }
+    //     if (!method_exists($this, $item["action"])) {
+    //         return false;
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 }
