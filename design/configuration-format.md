@@ -87,7 +87,7 @@ array(array("exclude" => array("object", "array"),
 Generate a set with three parameters; the first one is the static
 string `some text` for all elements, the second one is a set of all
 kinds of strings (depending on the module specific configuration
-provided), and the last one is an int which iss always `12`.
+provided), and the last one is an int which is always `12`.
 
 ```json
 [
@@ -112,6 +112,18 @@ array(array("value"   => "some text"),
       array("value"   => 12)
      );
 ```
+
+
+## Single Module Access
+
+It is also possible to generate test data for a single module
+(ie. similar to passing config with `"include": "string"`) by calling
+`get()` on the module itself (ie. `String::get()`.
+
+Configuration may also be called for these calls, but
+`include/exclude` will of course be ignored, and the same goes for
+module specific configuration for other modules than the one in
+question.
 
 
 ## Module Specific Configuration
