@@ -1,3 +1,5 @@
+PHPUNIT=./vendor/bin/phpunit
+
 test:
 	@rm -rf report
-	phpunit --coverage-html ./report
+	$(PHPUNIT) --coverage-html ./report
