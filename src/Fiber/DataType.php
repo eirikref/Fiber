@@ -12,7 +12,7 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-07-03
+ * @version 2013-07-05
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType
@@ -26,6 +26,15 @@ abstract class DataType
      * @access protected
      */
     protected $config = array();
+
+    /**
+     * List of available generators for the given data type, with
+     * their corresponding action/method
+     *
+     * @var    array $generators
+     * @access protected
+     */
+    protected $generators = array();
 
 
 
@@ -68,12 +77,10 @@ abstract class DataType
             $input = json_decode($input, true);
         }
 
-        try {
-            $this->validateConfig($input);
+        if ($this->validateConfig($input)) {
             $this->config = $input;
-        } catch (\Exception $e) {
+        } else {
             // Do something
-            echo "huffda\n";
         }
     }
 
@@ -105,6 +112,33 @@ abstract class DataType
 
 
     /**
+     * Generate all possible unique combinations of the input
+     * parameters
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-05
+     * @access private
+     * @return array
+     */
+    private function combineParams()
+    {
+        $args = func_get_args();
+        $num  = func_num_args();
+        $data = array();
+
+        // 1.   1, 2, 3, 4, 5
+        // 2.   true, false
+        // 3.   fisk
+        // 4.   7, 3, 4, 5
+
+        // while (
+
+
+    }
+
+
+
+    /**
      * Validate configuration array
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
@@ -116,7 +150,8 @@ abstract class DataType
      */
     private function validateConfig(array $config)
     {
-        
+        // Implement me
+        return true;
     }
 
 
@@ -133,7 +168,31 @@ abstract class DataType
      */
     public function get()
     {
-        // return $this->generateArray();
+        return $this->generateDataSet();
+    }
+
+
+
+    /**
+     * Generate the data set
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-05
+     * @access private
+     * @return array
+     */
+    private function generateDataSet()
+    {
+        // Option 1: Only allow single items for DataType::get(), but
+        // provide a super easy way of aking combination.
+        // String::get(...), String::get(...)
+
+        foreach ($this->generators as $name => $method) {
+            // 1. Check in config if:
+            //    - we're in include mode and this genrator IS included
+            //    - or if we're in exclude and this generator is NOT excluded
+            // 2. 
+        }
     }
 
 

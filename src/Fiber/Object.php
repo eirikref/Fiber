@@ -12,14 +12,14 @@ namespace Fiber;
  * Class for generating object test data
  *
  * @package Fiber
- * @version 2013-06-27
+ * @version 2013-07-05
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class Object extends DataType
+class Object extends \Fiber\DataType
 {
 
     /**
-     * Configuration options.
+     * Configuration options
      *
      * @var    array $options
      * @access protected

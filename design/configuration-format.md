@@ -1,10 +1,14 @@
-# Configuration Format
+# Fiber Configuration Format
+
+This is the work-in-progress design document for Fiber's configuration
+data format.
+
 
 ## General
 
-Configuration can be passed either as JSON or as a PHP array (as the
-first thing we will do is to convert the JSON string to an array
-anyway).
+Configuration can be passed either as JSON or as a native PHP array
+(as the first thing we will in the case of JSON anyway is to convert
+the string to a PHP array).
 
 
 ## Top-Level Configuration
@@ -14,10 +18,10 @@ be an array that may consist of three things, all of which are
 optional:
 
 1. An array of modules to either include or exclude. This parameter is
-   either called `include` if you want to start with an empty set of
-   modules and only include the ones you list, or `exclude` if you
-   want to start with the full set of modules and use all of them
-   except for the ones you list.
+   called `include` if you want to start with an empty set of modules
+   and only include the ones you list, or `exclude` if you want to
+   start with the full set of modules and use all of them except for
+   the ones you list.
 
 2. Module specific configuration that will be passed on down to the
    module(s) in question. The lowercased name of the module is used as

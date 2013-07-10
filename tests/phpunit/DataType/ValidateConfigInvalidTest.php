@@ -2,7 +2,7 @@
 
 namespace Fiber\Tests\DataType;
 
-class ValidateConfigTest extends \PHPUnit_Framework_TestCase
+class ValidateConfigInvalidTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

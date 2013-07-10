@@ -16,6 +16,9 @@
             "role": "Developer"
         }
     ],
+    "require": {
+        "psr/log": "dev-master"
+    },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
     },
