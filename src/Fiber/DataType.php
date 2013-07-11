@@ -12,7 +12,7 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-07-05
+ * @version 2013-07-11
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType
@@ -126,14 +126,36 @@ abstract class DataType
         $num  = func_num_args();
         $data = array();
 
-        // 1.   1, 2, 3, 4, 5
-        // 2.   true, false
-        // 3.   fisk
-        // 4.   7, 3, 4, 5
+        if (0 == $num) {
+            return;
+        }
 
-        // while (
+        $param = array_shift($args);
+        if (sizeof($args) > 0) {
+            $rest = $this->combineParams($args);
+            // print_r($rest);
+        }
+        
+        if (is_array($param)) {
+            foreach ($param as $el) {
+                if (isset($rest)) {
+                    array_unshift($rest, $el);
+                    $data[] = $rest;
+                } else {
+                    $data[] = $el;
+                }
+            }
+        } elseif (!is_object($param)) {
+            if (isset($rest)) {
+                array_unshift($rest, $param);
+                $data[] = $rest;
+            } else {
+                $data[] = $param;
+            }
+        }
 
-
+        // print_r($data);
+        return $data;
     }
 
 
