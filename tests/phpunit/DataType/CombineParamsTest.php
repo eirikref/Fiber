@@ -28,19 +28,19 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
     public function getCombinationData()
     {
         return array(
-            array(array(array("test")),
-                  array(array("test"))),
+            // array(array(array("test")),
+            //       array(array("test"))),
             array(array(array("test", "best")),
                   array(array("test", "best"))),
-            /* array(array(array(true, false)), */
-            /*       array(array(true), */
-            /*             array(false))) */
-            /* array(array("test", array(true, false)), */
-            /*       array(array("test", true), */
-            /*             array("test", false))), */
-            /* array(array(array(true, false), "true"), */
-            /*       array(array(true, "test"), */
-            /*             array(false, "test"))) */
+            array(array(array(true, false)),
+                  array(array(true),
+                        array(false))),
+            array(array("test", array(true, false)),
+                  array(array("test", true),
+                        array("test", false))),
+            array(array(array(true, false), "true"),
+                  array(array(true, "test"),
+                        array(false, "test")))
         );
     }
 
@@ -63,6 +63,6 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
         $tmp =  $method->invokeArgs($mock, $params);
 
         // print_r($expected);
-        print_r($tmp);
+        // print_r($tmp);
     }
 }

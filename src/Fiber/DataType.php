@@ -126,6 +126,8 @@ abstract class DataType
         $num  = func_num_args();
         $data = array();
 
+        // print_r($args);
+
         if (0 == $num) {
             return;
         }
@@ -133,31 +135,48 @@ abstract class DataType
         $param = array_shift($args);
         if (sizeof($args) > 0) {
             $rest = $this->combineParams($args);
-            // print_r($rest);
         }
         
         if (is_array($param)) {
             foreach ($param as $el) {
                 if (isset($rest)) {
-                    array_unshift($rest, $el);
-                    $data[] = $rest;
+                    $this->prependList($rest, $el);
                 } else {
-                    $data[] = $el;
+                    $data[] = array($el);
                 }
             }
         } elseif (!is_object($param)) {
             if (isset($rest)) {
-                array_unshift($rest, $param);
-                $data[] = $rest;
+                $this->prependList($rest, $param);
             } else {
-                $data[] = $param;
+                $data[] = array($param);
             }
         }
 
-        // print_r($data);
         return $data;
     }
 
+
+
+    /**
+     * Just a private helper method for $this->combineParams,
+     * inserting a given element to the front of every array inside
+     * the $list data set.
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-12
+     * @access private
+     * @return void
+     *
+     * @param  array $list The list containing the data sets
+     * @param  mixed $item The item to append to every data set
+     */
+    private function prependList(array $list, $item)
+    {
+        foreach ($list as $e) {
+            array_unshift($e, $item);
+        }
+    }
 
 
     /**
