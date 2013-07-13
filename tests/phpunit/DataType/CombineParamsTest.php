@@ -22,7 +22,7 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
      * 
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-05
-     * @access private
+     * @access public
      * @return array
      */
     public function getBasicCombinationData()
@@ -47,11 +47,32 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
 
 
     /**
+     * Basic combination test
+     *
+     * @test
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2013-07-05
+     * @access       public
+     * @covers       \Fiber\DataType::combineParams
+     * @dataProvider getBasicCombinationData
+     */
+    public function basicCombination($params, $expected)
+    {
+        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $method = new \ReflectionMethod($mock, "combineParams");
+        
+        $method->setAccessible(true);
+        $this->assertEquals($expected, $method->invokeArgs($mock, array($params)));
+    }
+
+
+
+    /**
      * Data provider for testing complex data combination
      * 
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-13
-     * @access private
+     * @access public
      * @return array
      */
     public function getComplexCombinationData()
@@ -81,13 +102,16 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Basic combination test
+     * A bit more complex combination test
      *
      * @test
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2013-07-13
+     * @access       public
      * @covers       \Fiber\DataType::combineParams
-     * @dataProvider getBasicCombinationData
+     * @dataProvider getComplexCombinationData
      */
-    public function basicCombination($params, $expected)
+    public function complexCombination($params, $expected)
     {
         $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
         $method = new \ReflectionMethod($mock, "combineParams");
@@ -99,18 +123,97 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * A bit more complex combination test
+     * Data provider for testing prependValue
+     * 
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-14
+     * @access public
+     * @return array
+     */
+    public function getPrependValueData()
+    {
+        return array(array(array(array(array("b"),
+                                       array("c")),
+                                 "a"),
+                           array(array("a", "b"),
+                                 array("a", "c"))),
+                     array(array(array(array(12),
+                                       array(-1)),
+                                 false),
+                           array(array(false, 12),
+                                 array(false, -1))),
+        );
+    }
+
+
+
+    /**
+     * Test prependValue()
      *
      * @test
-     * @covers       \Fiber\DataType::combineParams
-     * @dataProvider getComplexCombinationData
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2013-07-14
+     * @access       public
+     * @covers       \Fiber\DataType::prependValue
+     * @dataProvider getPrependValueData
      */
-    public function complexCombination($params, $expected)
+    public function testPrependValue($params, $expected)
     {
         $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
-        $method = new \ReflectionMethod($mock, "combineParams");
-        
+        $method = new \ReflectionMethod($mock, "prependValue");
+
         $method->setAccessible(true);
-        $this->assertEquals($expected, $method->invokeArgs($mock, array($params)));
+        $this->assertEquals($expected, $method->invokeArgs($mock, $params));
+    }
+
+
+
+    /**
+     * Data provider for testing prependArray
+     * 
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-14
+     * @access public
+     * @return array
+     */
+    public function getPrependArrayData()
+    {
+        return array(array(array(array(array("b"),
+                                       array("c")),
+                                 array(1, 2)),
+                           array(array(1, "b"),
+                                 array(1, "c"),
+                                 array(2, "b"),
+                                 array(2, "c"))),
+
+                     array(array(array(array(12),
+                                       array(-1)),
+                                 array(true, false)),
+                           array(array(true, 12),
+                                 array(true, -1),
+                                 array(false, 12),
+                                 array(false, -1))),
+        );
+    }
+
+
+
+    /**
+     * Test prependArray()
+     *
+     * @test
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2013-07-14
+     * @access       public
+     * @covers       \Fiber\DataType::prependArray
+     * @dataProvider getPrependArrayData
+     */
+    public function testPrependArray($params, $expected)
+    {
+        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $method = new \ReflectionMethod($mock, "prependArray");
+
+        $method->setAccessible(true);
+        $this->assertEquals($expected, $method->invokeArgs($mock, $params));
     }
 }
