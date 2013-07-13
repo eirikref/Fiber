@@ -12,7 +12,7 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-07-11
+ * @version 2013-07-13
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType
@@ -120,34 +120,26 @@ abstract class DataType
      * @access private
      * @return array
      */
-    private function combineParams()
+    private function combineParams(array $args)
     {
-        $args = func_get_args();
-        $num  = func_num_args();
-        $data = array();
-
-        // print_r($args);
-
-        if (0 == $num) {
-            return;
-        }
-
+        $data  = array();
         $param = array_shift($args);
+
         if (sizeof($args) > 0) {
             $rest = $this->combineParams($args);
         }
         
         if (is_array($param)) {
-            foreach ($param as $el) {
-                if (isset($rest)) {
-                    $this->prependList($rest, $el);
-                } else {
-                    $data[] = array($el);
+            if (isset($rest)) {
+                $data = $this->prependArray($rest, $param);
+            } else {
+                foreach ($param as $p) {
+                    $data[] = array($p);
                 }
             }
         } elseif (!is_object($param)) {
             if (isset($rest)) {
-                $this->prependList($rest, $param);
+                $data = $this->prependValue($rest, $param);
             } else {
                 $data[] = array($param);
             }
@@ -160,23 +152,63 @@ abstract class DataType
 
     /**
      * Just a private helper method for $this->combineParams,
-     * inserting a given element to the front of every array inside
-     * the $list data set.
+     * inserting a given value to the front of every array inside the
+     * $list data set.
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-12
      * @access private
      * @return void
      *
-     * @param  array $list The list containing the data sets
-     * @param  mixed $item The item to append to every data set
+     * @param  array $list  The list containing the data sets
+     * @param  mixed $value The value to prepend to every data set
      */
-    private function prependList(array $list, $item)
+    private function prependValue(array $list, $value)
     {
+        $i = 0;
         foreach ($list as $e) {
-            array_unshift($e, $item);
+            if (is_array($e)) {
+                array_unshift($e, $value);
+                $list[$i] = $e;
+                ++$i;
+            }
         }
+
+        return $list;
     }
+
+
+
+    /**
+     * Just a private helper method for $this->combineParams,
+     * inserting values from an array to the front of each element in
+     * an already existing data set.
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-13
+     * @access private
+     * @return void
+     *
+     * @param  array $list  The list containing the data sets
+     * @param  array $param The array of values
+     */
+    private function prependArray(array $list, array $param)
+    {
+        $new = array();
+
+        foreach ($list as $e) {
+            if (is_array($e)) {
+                foreach ($param as $p) {
+                    $tmp = $e;
+                    array_unshift($tmp, $p);
+                    $new[] = $tmp;
+                }
+            }
+        }
+
+        return $new;
+    }
+
 
 
     /**

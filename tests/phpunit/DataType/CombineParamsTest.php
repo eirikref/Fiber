@@ -11,7 +11,7 @@ namespace Fiber\Tests\DataType;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-11
+ * @version    2013-07-13
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class CombineParamsTest extends \PHPUnit_Framework_TestCase
@@ -28,9 +28,9 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
     public function getCombinationData()
     {
         return array(
-            // array(array(array("test")),
-            //       array(array("test"))),
-            array(array(array("test", "best")),
+            array(array("test"),
+                  array(array("test"))),
+            array(array("test", "best"),
                   array(array("test", "best"))),
             array(array(array(true, false)),
                   array(array(true),
@@ -38,7 +38,7 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
             array(array("test", array(true, false)),
                   array(array("test", true),
                         array("test", false))),
-            array(array(array(true, false), "true"),
+            array(array(array(true, false), "test"),
                   array(array(true, "test"),
                         array(false, "test")))
         );
@@ -59,10 +59,7 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
         $method = new \ReflectionMethod($mock, "combineParams");
         
         $method->setAccessible(true);
-        // $this->assertEquals($expected, $method->invokeArgs($mock, $params));
-        $tmp =  $method->invokeArgs($mock, $params);
-
-        // print_r($expected);
-        // print_r($tmp);
+        $this->assertEquals($expected, $method->invokeArgs($mock, array($params)));
+        $tmp =  $method->invokeArgs($mock, array($params));
     }
 }
