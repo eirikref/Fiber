@@ -196,9 +196,9 @@ abstract class DataType
     {
         $new = array();
 
-        foreach ($list as $e) {
-            if (is_array($e)) {
-                foreach ($param as $p) {
+        foreach ($param as $p) {
+            foreach ($list as $e) {
+                if (is_array($e)) {
                     $tmp = $e;
                     array_unshift($tmp, $p);
                     $new[] = $tmp;
