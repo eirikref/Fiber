@@ -65,6 +65,8 @@ dataProvider methods.
   long, options should probably have a min/max length setting,
   all lowercase, all uppercase
 
+* Support custom DataTypes
+
 
 ## Thoughts on Possible Usage
 
