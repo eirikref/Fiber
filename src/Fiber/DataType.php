@@ -239,9 +239,9 @@ abstract class DataType
      * @access public
      * @return array
      */
-    public static function get($config = null)
+    public function get($config = null)
     {
-        return self::generateDataSet();
+        return $this->generateDataSet();
     }
 
 
@@ -254,14 +254,14 @@ abstract class DataType
      * @access private
      * @return array
      */
-    private static function generateDataSet()
+    private function generateDataSet()
     {
         // Option 1: Only allow single items for DataType::get(), but
         // provide a super easy way of aking combination.
         // String::get(...), String::get(...)
         $data = array();
 
-        foreach (self::generators as $name => $method) {
+        foreach ($this->generators as $name => $method) {
             if (method_exists($this, $method)) {
                 $data[] = $this->{$method}();
             }
