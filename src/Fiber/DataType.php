@@ -12,7 +12,7 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-07-13
+ * @version 2013-07-16
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType
@@ -239,13 +239,13 @@ abstract class DataType
      * @access public
      * @return array
      */
-    public function get()
+    public static function get($config = null)
     {
-        return $this->generateDataSet();
+        return self::generateDataSet();
     }
 
 
-
+    
     /**
      * Generate the data set
      *
@@ -254,18 +254,24 @@ abstract class DataType
      * @access private
      * @return array
      */
-    private function generateDataSet()
+    private static function generateDataSet()
     {
         // Option 1: Only allow single items for DataType::get(), but
         // provide a super easy way of aking combination.
         // String::get(...), String::get(...)
+        $data = array();
 
-        foreach ($this->generators as $name => $method) {
+        foreach (self::generators as $name => $method) {
+            if (method_exists($this, $method)) {
+                $data[] = $this->{$method}();
+            }
             // 1. Check in config if:
-            //    - we're in include mode and this genrator IS included
+            //    - we're in include mode and this generator IS included
             //    - or if we're in exclude and this generator is NOT excluded
             // 2. 
         }
+
+        return $data;
     }
 
 
