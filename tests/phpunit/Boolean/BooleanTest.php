@@ -40,7 +40,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-17
      * @access public
-     * @covers \Fiber\Boolean::getTrue
+     * @covers \Fiber\Boolean::getFalse
      */
     public function getFalseDirectly()
     {
