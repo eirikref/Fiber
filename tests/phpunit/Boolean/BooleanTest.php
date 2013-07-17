@@ -1,9 +1,31 @@
 <?php
+/**
+ * Fiber: Unit tests
+ * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
+ */
 
-class BooleanBasicTest extends PHPUnit_Framework_TestCase
+namespace Fiber\Tests\DataType;
+
+/**
+ * Fiber: Unit tests for DataType::combineParams()
+ *
+ * @package    Fiber
+ * @subpackage Tests
+ * @version    2013-07-17
+ * @author     Eirik Refsdal <eirikref@gmail.com>
+ */
+class BooleanTest extends PHPUnit_Framework_TestCase
 {
 
     /**
+    /**
+     * Data provider for testing basic data combination
+     * 
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-05
+     * @access public
+     * @return array
+     */
      * @covers \Fiber\Boolean
      */
     public function singleParam()
