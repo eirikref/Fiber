@@ -257,7 +257,7 @@ abstract class DataType
     private function generateDataSet()
     {
         // Option 1: Only allow single items for DataType::get(), but
-        // provide a super easy way of aking combination.
+        // provide a super easy way of making combinations.
         // String::get(...), String::get(...)
         $data = array();
 
@@ -273,84 +273,4 @@ abstract class DataType
 
         return $data;
     }
-
-
-
-    /**
-     * Generate the array to be returned
-     *
-     * Generic generator of the data we want to return.
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-06-27
-     * @access private
-     * @return array
-     */
-    // private function generateArray()
-    // {
-    //     $data = array();
-    //     $i    = 0;
-
-    //     foreach ($this->options as $key => $opt) {
-    //         if (!$this->validateItem($opt)) {
-    //             continue;
-    //         }
-
-    //         $call = $opt["action"];
-    //         $ret  = $this->{$call}();
-            
-    //         if (count($this->params) > 0) {
-    //             foreach ($this->params as $val) {
-    //                 if ("__GEN__" == $val) {
-    //                     $data[$i][] = $ret;
-    //                 } else {
-    //                     $data[$i][] = $val;
-    //                 }
-    //             }
-    //         } else {
-    //             $data[$i][] = $ret;
-    //         }
-    //         ++$i;
-    //     }
-
-    //     return $data;
-    // }
-
-
-
-    /**
-     * Validate options entry
-     *
-     * Validate a single item in the $this->options array
-     *
-     * FIXME: Refactor to have better error handling, with finer
-     * granularity
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-06-30
-     * @access private
-     * @return boolean
-     *
-     * @param  array $item
-     */
-    // private function validateItem(array $item)
-    // {
-    //     $maxLen = 32;
-
-    //     if (!isset($item["active"]) || true !== $item["active"]) {
-    //         return false;
-    //     }
-        
-    //     if (!isset($item["action"]) || !is_string($item["action"]) ||
-    //         strlen($item["action"]) < 1 ||
-    //         strlen($item["action"]) > $maxLen) {
-    //         return false;
-    //     }
-        
-    //     if (!method_exists($this, $item["action"])) {
-    //         return false;
-    //     }
-
-    //     return true;
-    // }
 }

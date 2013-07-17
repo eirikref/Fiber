@@ -12,23 +12,21 @@ namespace Fiber;
  * Class for generating boolean test data
  *
  * @package Fiber
- * @version 2013-06-27
+ * @version 2013-07-17
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Boolean extends DataType
 {
     
     /**
-     * Configuration options.
+     * List of available generators for the given data type, with
+     * their corresponding action/method
      *
-     * @var    array $options
+     * @var    array $generators
      * @access protected
      */
-    protected $options = array("true"  => array("active" => true,
-                                                "action" => "getTrue"),
-                               "false" => array("active" => true,
-                                                "action" => "getFalse")
-                               );
+    protected $generators = array("true"  => "getTrue",
+                                  "false" => "getFalse");
 
 
 
