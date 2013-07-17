@@ -14,56 +14,36 @@ namespace Fiber\Tests\DataType;
  * @version    2013-07-17
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class BooleanTest extends PHPUnit_Framework_TestCase
+class BooleanTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-    /**
-     * Data provider for testing basic data combination
-     * 
+     * Check getTrue() directly
+     *
+     * @test
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-05
+     * @since  2013-07-17
      * @access public
-     * @return array
+     * @covers \Fiber\Boolean::getTrue
      */
-     * @covers \Fiber\Boolean
-     */
-    public function singleParam()
+    public function getTrueDirectly()
     {
-        $exp       = array(array(true),
-                           array(false));
-        $generator = new \Fiber\Boolean();
-        
-        $this->assertEquals($exp, $generator->get());
+        $this->assertTrue(\Fiber\Boolean::getTrue());
     }
 
 
 
     /**
-     * @covers \Fiber\Boolean
+     * Check getFalse() directly
+     *
+     * @test
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-17
+     * @access public
+     * @covers \Fiber\Boolean::getTrue
      */
-    public function twoParams()
+    public function getFalseDirectly()
     {
-        $exp       = array(array("test", true),
-                           array("test", false));
-        $opts      = array("params" => array("test", "__GEN__"));
-        $generator = new \Fiber\Boolean($opts);
-        
-        $this->assertEquals($exp, $generator->get());
-    }
-
-
-
-    /**
-     * @covers \Fiber\Boolean
-     */
-    public function multipleParams()
-    {
-        $exp       = array(array("test", true, "foo", "bar"),
-                           array("test", false, "foo", "bar"));
-        $opts      = array("params" => array("test", "__GEN__", "foo", "bar"));
-        $generator = new \Fiber\Boolean($opts);
-        
-        $this->assertEquals($exp, $generator->get());
+        $this->assertFalse(\Fiber\Boolean::getFalse());
     }
 }
