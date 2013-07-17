@@ -38,7 +38,7 @@ class Boolean extends DataType
      * @access public
      * @return boolean
      */
-    public function getTrue()
+    public static function getTrue()
     {
         return true;
     }
@@ -53,7 +53,7 @@ class Boolean extends DataType
      * @access public
      * @return boolean
      */
-    public function getFalse()
+    public static function getFalse()
     {
         return false;
     }
