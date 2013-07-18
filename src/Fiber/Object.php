@@ -12,21 +12,20 @@ namespace Fiber;
  * Class for generating object test data
  *
  * @package Fiber
- * @version 2013-07-05
+ * @version 2013-07-18
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Object extends \Fiber\DataType
 {
 
     /**
-     * Configuration options
+     * List of available generators for the given data type, with
+     * their corresponding action/method
      *
-     * @var    array $options
+     * @var    array $generators
      * @access protected
      */
-    protected $options = array("object" => array("active" => true,
-                                                 "action" => "getObject")
-                               );
+    protected $generators = array("stdclass"  => "getStdClass");
 
 
 
@@ -38,7 +37,7 @@ class Object extends \Fiber\DataType
      * @access public
      * @return object
      */
-    public function getObject()
+    public static function getStdClass()
     {
         return new \stdClass();
     }
