@@ -4,14 +4,14 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber\Tests\DataType;
+namespace Fiber\Tests\Boolean;
 
 /**
  * Fiber: Unit tests for DataType::combineParams()
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-17
+ * @version    2013-07-18
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class BooleanTest extends \PHPUnit_Framework_TestCase
