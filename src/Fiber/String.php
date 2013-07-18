@@ -11,6 +11,14 @@ namespace Fiber;
  *
  * Class for generating string test data
  *
+ * Things: - strings of various length (min, max, exact)
+ *         - different charsets
+ *         - empty strings (just length 0)
+ *         - really long strings (1M, 5M, 10M, etc.)
+ *         - single string, words, sentences, lorem ipsum, special chars
+ *           (!?;:, etc.), password (fix of small, caps, numbers,
+ *           etc.)
+ *
  * @package Fiber
  * @version 2013-06-27
  * @author  Eirik Refsdal <eirikref@gmail.com>
@@ -19,14 +27,16 @@ class String extends DataType
 {
 
     /**
-     * Configuration options.
+     * Get object
      *
-     * @var    array $options
-     * @access protected
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-06-27
+     * @access private
+     * @return object
      */
-    // protected $options = array("tbd" => array("active" => true,
-    //                                           "action" => "tbd")
-    //                            );
+    private function generateString($length, $charset, $mode)
+    {
+    }
 
 
 
@@ -34,11 +44,12 @@ class String extends DataType
      * Get object
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-06-27
+     * @since  2013-07-18
      * @access public
      * @return object
      */
-    public function getByLength($length)
+    public function getEmpty()
     {
+        return "";
     }
 }
