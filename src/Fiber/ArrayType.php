@@ -35,6 +35,7 @@ class ArrayType extends DataType
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-15
      * @access public
+     * @return array
      *
      * @param  mixed $config Generator configuration
      */
