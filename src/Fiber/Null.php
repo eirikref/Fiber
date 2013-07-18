@@ -12,21 +12,20 @@ namespace Fiber;
  * Class for generating null test data
  *
  * @package Fiber
- * @version 2013-06-27
+ * @version 2013-07-18
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Null extends DataType
 {
-
+    
     /**
-     * Configuration options.
+     * List of available generators for the given data type, with
+     * their corresponding action/method
      *
-     * @var    array $options
+     * @var    array $generators
      * @access protected
      */
-    protected $options = array("null" => array("active" => true,
-                                               "action" => "getNull")
-                               );
+    protected $generators = array("null"  => "getNull");
 
 
 
@@ -38,7 +37,7 @@ class Null extends DataType
      * @access public
      * @return null
      */
-    public function getNull()
+    public static function getNull()
     {
         return null;
     }
