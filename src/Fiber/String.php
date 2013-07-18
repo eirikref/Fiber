@@ -32,7 +32,7 @@ class String extends DataType
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-27
      * @access private
-     * @return object
+     * @return string
      */
     private function generateString($length, $charset, $mode)
     {
@@ -46,7 +46,7 @@ class String extends DataType
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-18
      * @access public
-     * @return object
+     * @return string
      */
     public function getEmpty()
     {
