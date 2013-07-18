@@ -4,14 +4,14 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber\Tests\DataType;
+namespace Fiber\Tests\ArrayType;
 
 /**
  * Fiber: Unit tests for Array::getEmptyArray()
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-16
+ * @version    2013-07-18
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
