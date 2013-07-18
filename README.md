@@ -88,3 +88,10 @@ $data = Fiber::get($cfg);
 $cfg  = '{"include": "integer, float"}';
 $data = Fiber::get($cfg);
 ```
+
+
+## Current Challenges
+
+* Decide on static vs. instantiated usage
+* DataType::validateConfig() and passing sub-config
+* DataType::generateDataSet()
