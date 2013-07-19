@@ -11,7 +11,7 @@ namespace Fiber\Tests\ArrayType;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-18
+ * @version    2013-07-19
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
@@ -46,7 +46,7 @@ class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function getEmptyThroughArrayType()
     {
-        $exp = array(array());
+        $exp = array(array(array()));
         $cfg = json_encode(array("include" => array("empty")));
 
         $gen = new \Fiber\ArrayType($cfg);
@@ -66,7 +66,7 @@ class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function getEmptyThroughFiber()
     {
-        $exp = array();
+        $exp = array(array(array()));
         $cfg = json_encode(array("include" => array("array"),
                                  "array"   => array("include" => array("empty"))
         ));

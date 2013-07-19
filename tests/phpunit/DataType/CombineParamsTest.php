@@ -11,7 +11,7 @@ namespace Fiber\Tests\DataType;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-13
+ * @version    2013-07-19
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class CombineParamsTest extends \PHPUnit_Framework_TestCase
@@ -215,5 +215,28 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
 
         $method->setAccessible(true);
         $this->assertEquals($expected, $method->invokeArgs($mock, $params));
+    }
+
+
+
+    /**
+     * Test corner case of combineParams
+     *
+     * @test
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-19
+     * @access public
+     * @covers \Fiber\DataType::combineParams
+     */
+    public function combineEmptyArray()
+    {
+        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $method = new \ReflectionMethod($mock, "combineParams");
+        $method->setAccessible(true);
+
+        $input    = array(array());
+        $expected = array(array(array()));
+        
+        $this->assertEquals($expected, $method->invokeArgs($mock, array($input)));
     }
 }

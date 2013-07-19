@@ -12,7 +12,7 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-07-16
+ * @version 2013-07-19
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType
@@ -129,7 +129,7 @@ abstract class DataType
             $rest = $this->combineParams($args);
         }
         
-        if (is_array($param)) {
+        if (is_array($param) && count($param) > 0) {
             if (isset($rest)) {
                 $data = $this->prependArray($rest, $param);
             } else {
@@ -256,7 +256,10 @@ abstract class DataType
      */
     public function get($config = null)
     {
-        return $this->generateArray();
+        $array = $this->generateArray();
+        $set   = $this->combineParams($array);
+
+        return $set;
     }
 
 
@@ -273,23 +276,12 @@ abstract class DataType
     {
         $data = array();
 
-        
+        foreach ($this->generators as $key => $method) {
+            if (method_exists($this, $method)) {
+                $data[] = $this->{$method}();
+            }
+        }
 
-        // Option 1: Only allow single items for DataType::get(), but
-        // provide a super easy way of making combinations.
-        // String::get(...), String::get(...)
-        /* $data = array(); */
-
-        /* foreach ($this->generators as $name => $method) { */
-        /*     if (method_exists($this, $method)) { */
-        /*         $data[] = $this->{$method}(); */
-        /*     } */
-        /*     // 1. Check in config if: */
-        /*     //    - we're in include mode and this generator IS included */
-        /*     //    - or if we're in exclude and this generator is NOT excluded */
-        /*     // 2.  */
-        /* } */
-
-        /* return $data; */
+        return $data;
     }
 }
