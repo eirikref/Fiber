@@ -234,6 +234,21 @@ abstract class DataType
      *
      * Default implementation. Override in subclasses as necessary.
      *
+     * How things work around here: The user is supposed to call
+     * $fiber->get(), $array->get(), etc. and get back a complete data
+     * set that is ready for use in PHPUnit as a standard data
+     * provider array.
+     *
+     * Internally we're going to call generateArray(), which will make
+     * an array with all the possible, different values. Then we'll
+     * merge it here in get(). So ie. if the user calls String::get()
+     * directly, we'll call generateArray(), package the array nicely
+     * below and return it.
+     *
+     * If the user calls Fiber::get(), we'll call generateArray() for
+     * all the different types of data to be included, and then merge
+     * it all in Fiber::get(). Or something like that.
+     *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-28
      * @access public
@@ -241,36 +256,40 @@ abstract class DataType
      */
     public function get($config = null)
     {
-        return $this->generateDataSet();
+        return $this->generateArray();
     }
 
 
     
     /**
-     * Generate the data set
+     * Generate the raw array of values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-05
      * @access private
      * @return array
      */
-    private function generateDataSet()
+    private function generateArray()
     {
+        $data = array();
+
+        
+
         // Option 1: Only allow single items for DataType::get(), but
         // provide a super easy way of making combinations.
         // String::get(...), String::get(...)
-        $data = array();
+        /* $data = array(); */
 
-        foreach ($this->generators as $name => $method) {
-            if (method_exists($this, $method)) {
-                $data[] = $this->{$method}();
-            }
-            // 1. Check in config if:
-            //    - we're in include mode and this generator IS included
-            //    - or if we're in exclude and this generator is NOT excluded
-            // 2. 
-        }
+        /* foreach ($this->generators as $name => $method) { */
+        /*     if (method_exists($this, $method)) { */
+        /*         $data[] = $this->{$method}(); */
+        /*     } */
+        /*     // 1. Check in config if: */
+        /*     //    - we're in include mode and this generator IS included */
+        /*     //    - or if we're in exclude and this generator is NOT excluded */
+        /*     // 2.  */
+        /* } */
 
-        return $data;
+        /* return $data; */
     }
 }
