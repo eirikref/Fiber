@@ -239,15 +239,15 @@ abstract class DataType
      * set that is ready for use in PHPUnit as a standard data
      * provider array.
      *
-     * Internally we're going to call generateArray(), which will make
-     * an array with all the possible, different values. Then we'll
-     * merge it here in get(). So ie. if the user calls String::get()
-     * directly, we'll call generateArray(), package the array nicely
-     * below and return it.
+     * Internally we're going to call getArray(), which will make an
+     * array with all the possible, different values. Then we'll merge
+     * it here in get(). So ie. if the user calls String::get()
+     * directly, we'll call getArray(), package the array nicely below
+     * and return it.
      *
-     * If the user calls Fiber::get(), we'll call generateArray() for
-     * all the different types of data to be included, and then merge
-     * it all in Fiber::get(). Or something like that.
+     * If the user calls Fiber::get(), we'll call getArray() for all
+     * the different types of data to be included, and then merge it
+     * all in Fiber::get(). Or something like that.
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-28
