@@ -12,7 +12,7 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-07-19
+ * @version 2013-07-20
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType
@@ -117,10 +117,10 @@ abstract class DataType
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-05
-     * @access private
+     * @access protected
      * @return array
      */
-    private function combineParams(array $args)
+    protected function combineParams(array $args)
     {
         $data  = array();
         $param = array_shift($args);
@@ -256,7 +256,7 @@ abstract class DataType
      */
     public function get($config = null)
     {
-        $array = $this->generateArray();
+        $array = $this->getArray();
         $set   = $this->combineParams($array);
 
         return $set;
@@ -269,10 +269,10 @@ abstract class DataType
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-05
-     * @access private
+     * @access public
      * @return array
      */
-    private function generateArray()
+    public function getArray()
     {
         $data = array();
 

@@ -58,7 +58,7 @@ class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * Get through the main Fiber class
      *
-     * @Xtest
+     * @test
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-16
      * @access public
