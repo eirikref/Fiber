@@ -34,9 +34,9 @@ class String extends DataType
      * @access private
      * @return string
      */
-    private function generateString($length, $charset, $mode)
-    {
-    }
+    /* private function generateString($length, $charset, $mode) */
+    /* { */
+    /* } */
 
 
 
