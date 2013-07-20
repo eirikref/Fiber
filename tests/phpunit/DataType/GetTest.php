@@ -33,4 +33,54 @@ class GetTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $boolean->get());
     }
+
+
+
+    /**
+     * Use Boolean class to test DataType::get with JSON config
+     *
+     * Pass along config in JSON format, and check the output to see
+     * that the config was parsed the way we expected it to.
+     *
+     * @test
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-20
+     * @access public
+     * @covers \Fiber\DataType::get
+     */
+    public function getWithJsonConfig()
+    {
+        $this->markTestSkipped();
+
+        $boolean  = new \Fiber\Boolean();
+        $json     = '{ "include": "true" }';
+        $expected = array(array(true));
+
+        $this->assertEquals($expected, $boolean->get($json));
+    }
+
+
+
+    /**
+     * Use Boolean class to test DataType::get with invalid JSON config
+     *
+     * Pass along config in JSON format, and check the output to see
+     * that the config was parsed the way we expected it to.
+     *
+     * @test
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-20
+     * @access public
+     * @covers \Fiber\DataType::get
+     */
+    public function getWithInvalidConfig()
+    {
+        $this->markTestSkipped();
+
+        $boolean  = new \Fiber\Boolean();
+        $json     = '{ "include": "true", "exclude": "true" }';
+        $expected = array(array(true));
+
+        $this->assertFalse($boolean->get($json));
+    }
 }
