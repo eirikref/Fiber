@@ -19,15 +19,6 @@ abstract class DataType
 {
     
     /**
-     * User supplied configuration with parameters for generating test
-     * data
-     *
-     * @var    array $config
-     * @access protected
-     */
-    protected $config = array();
-
-    /**
      * List of available generators for the given data type, with
      * their corresponding action/method
      *
@@ -35,54 +26,6 @@ abstract class DataType
      * @access protected
      */
     protected $generators = array();
-
-
-
-    /**
-     * Constructor
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-06-27
-     * @access public
-     *
-     * @param  mixed $config Generator configuration
-     */
-    public function __construct($config = null)
-    {
-        if (isset($config)) {
-            $this->setConfig($config);
-        }
-    }
-
-
-
-    /**
-     * Set configuration
-     *
-     * Set configuration for the data generator. $config needs to be
-     * either a PHP array or a JSON array, as defined by the format
-     * found at
-     * https://github.com/eirikref/Fiber/blob/master/design/configuration-format.md
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-06-27
-     * @access public
-     * @return void
-     *
-     * @param  mixed $config Generator config
-     */
-    public function setConfig($input)
-    {
-        if ($this->isJson($input)) {
-            $input = json_decode($input, true);
-        }
-
-        if ($this->validateConfig($input)) {
-            $this->config = $input;
-        } else {
-            // Do something
-        }
-    }
 
 
 
@@ -223,7 +166,6 @@ abstract class DataType
      */
     private function validateConfig(array $config)
     {
-        // Implement me
         return true;
     }
 
@@ -249,17 +191,31 @@ abstract class DataType
      * the different types of data to be included, and then merge it
      * all in Fiber::get(). Or something like that.
      *
+     * $config needs to be either a PHP array or a JSON array, as
+     * defined by the format found at
+     * https://github.com/eirikref/Fiber/blob/master/design/configuration-format.md
+     *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-28
      * @access public
      * @return array
+     *
+     * @param  mixed $config Either an array or JSON
      */
-    public function get($config = null)
+    public function get($config = array())
     {
-        $array = $this->getArray();
-        $set   = $this->combineParams($array);
+        if ($this->isJson($config)) {
+            $config = json_decode($config, true);
+        }
 
-        return $set;
+        if ($this->validateConfig($config)) {
+            $array = $this->getArray($config);
+            $set   = $this->combineParams($array);
+
+            return $set;
+        } else {
+            // Something
+        }
     }
 
 
