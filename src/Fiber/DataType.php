@@ -204,18 +204,20 @@ abstract class DataType
      */
     public function get($config = array())
     {
-        if ($this->isJson($config)) {
+        $set = array();
+
+        if (is_string($config) && $this->isJson($config)) {
             $config = json_decode($config, true);
         }
 
-        if ($this->validateConfig($config)) {
+        if (is_array($config) && $this->validateConfig($config)) {
             $array = $this->getArray($config);
             $set   = $this->combineParams($array);
-
-            return $set;
         } else {
-            // Something
+            // Do some sort of error logging
         }
+
+        return $set;
     }
 
 
