@@ -94,4 +94,3 @@ $data = Fiber::get($cfg);
 
 * Decide on static vs. instantiated usage
 * DataType::validateConfig() and passing sub-config
-* DataType::generateDataSet()
