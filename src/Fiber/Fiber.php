@@ -65,5 +65,4 @@ class Fiber extends DataType
         $set = call_user_func_array(array($this, "combineParams"), $data);
         return $set;
     }
-
 }
