@@ -12,7 +12,7 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-07-20
+ * @version 2013-07-22
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType
@@ -229,11 +229,13 @@ abstract class DataType
      * @since  2013-07-05
      * @access public
      * @return array
+     *
+     * @param  array $config
      */
-    public function getArray()
+    public function getArray(array $config = null)
     {
         $data = array();
-
+        
         foreach ($this->generators as $key => $method) {
             if (method_exists($this, $method)) {
                 $data[] = $this->{$method}();
@@ -241,5 +243,72 @@ abstract class DataType
         }
 
         return $data;
+    }
+
+
+
+    /**
+     * Get list of valid generators for a given request
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-22
+     * @access private
+     * @return array
+     *
+     * @param  array $config
+     */
+    private function getGenerators(array $config)
+    {
+        $ret = array();
+
+        if (isset($config["include"])) {
+            $include = $this->parseConfigList($config["include"]);
+
+            foreach ($include as $gen) {
+                if (isset($this->generators[$gen])) {
+                    $ret[] = $gen;
+                }
+            }
+        } elseif (isset($config["exclude"])) {
+            $res     = $this->parseConfigList($config["exclude"]);
+            $exclude = array_flip($res);
+            
+            foreach ($this->generators as $gen => $method) {
+                if (!isset($exclude[$gen])) {
+                    $ret[] = $gen;
+                }
+            }
+        } else {
+            $ret = array_keys($this->generators);
+        }
+
+        return $ret;
+    }
+
+
+
+    /**
+     * Parse list of generators found in config
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-22
+     * @access private
+     * @return array
+     *
+     * @param  string $configList
+     */
+    private function parseConfigList($configList)
+    {
+        $ret  = array();
+
+        if (is_string($configList) && strlen($configList) > 0) {
+            $list = explode(",", $configList);
+
+            foreach ($list as $val) {
+                $ret[] = trim($val);
+            }
+        }
+
+        return $ret;
     }
 }
