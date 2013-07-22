@@ -73,6 +73,8 @@ class GetTest extends \PHPUnit_Framework_TestCase
      */
     public function getWithInvalidConfig()
     {
+        $this->markTestSkipped();
+
         $boolean  = new \Fiber\Boolean();
         $json     = '{ "include": "true", "exclude": "true" }';
         $expected = array(array(true));

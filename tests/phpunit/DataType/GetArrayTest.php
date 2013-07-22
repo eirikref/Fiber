@@ -29,8 +29,9 @@ class GetArrayTest extends \PHPUnit_Framework_TestCase
     public function simpleGetArray()
     {
         $boolean  = new \Fiber\Boolean();
+        $config   = array();
         $expected = array(true, false);
 
-        $this->assertEquals($expected, $boolean->getArray());
+        $this->assertEquals($expected, $boolean->getArray($config));
     }
 }

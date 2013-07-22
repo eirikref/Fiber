@@ -232,11 +232,14 @@ abstract class DataType
      *
      * @param  array $config
      */
-    public function getArray(array $config = null)
+    public function getArray(array $config)
     {
-        $data = array();
+        $data       = array();
+        $generators = $this->getGenerators($config);
         
-        foreach ($this->generators as $key => $method) {
+        foreach ($generators as $g) {
+            $method = $this->generators[$g];
+
             if (method_exists($this, $method)) {
                 $data[] = $this->{$method}();
             }

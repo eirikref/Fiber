@@ -59,7 +59,7 @@ class Fiber extends DataType
         foreach ($this->getTypes() as $type) {
             $class  = "\Fiber\\$type";
             $obj    = new $class();
-            $data[] = $obj->getArray();
+            $data[] = $obj->getArray(array());
         }
 
         $set = call_user_func_array(array($this, "combineParams"), $data);
