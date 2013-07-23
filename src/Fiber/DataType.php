@@ -166,6 +166,14 @@ abstract class DataType
      */
     private function validateConfig(array $config)
     {
+        if (0 == count($config)) {
+            return true;
+        }
+
+        if (isset($config["include"]) && isset($config["exclude"])) {
+            return false;
+        }
+
         return true;
     }
 
