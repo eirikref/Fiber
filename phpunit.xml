@@ -2,8 +2,11 @@
          bootstrap="phpunit-bootstrap.php"
          verbose="true">
   <testsuites>
-    <testsuite name="Loom">
-      <directory>tests/phpunit/</directory>
+    <testsuite name="Fiber Unit Tests">
+      <directory>tests/unit/</directory>
+    </testsuite>
+    <testsuite name="Fiber System Tests">
+      <directory>tests/system/</directory>
     </testsuite>
   </testsuites>
 
