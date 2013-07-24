@@ -11,7 +11,7 @@ namespace Fiber\Tests\Fiber;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-18
+ * @version    2013-07-24
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class GetTypesTest extends \PHPUnit_Framework_TestCase
@@ -29,9 +29,9 @@ class GetTypesTest extends \PHPUnit_Framework_TestCase
     public function getDefaultTypes()
     {
         $fiber   = new \Fiber\Fiber();
-        $defSize = 1;
+        $defSize = 3;
 
         $this->assertTrue(is_array($fiber->getTypes()));
-        $this->assertEquals(1, count($fiber->getTypes()));
+        $this->assertEquals($defSize, count($fiber->getTypes()));
     }
 }

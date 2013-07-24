@@ -75,8 +75,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
     {
         $boolean  = new \Fiber\Boolean();
         $json     = '{ "include": "true", "exclude": "true" }';
-        $expected = array();
 
-        $this->assertEquals($expected, $boolean->get($json));
+        $this->assertNull($boolean->get($json));
     }
 }
