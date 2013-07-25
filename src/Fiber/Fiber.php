@@ -25,9 +25,9 @@ class Fiber extends Base
      * @var    array $types
      * @access private
      */
-    private $types = array("ArrayType",
-                           "Boolean",
-                           "Object");
+    private $types = array("array"  => "ArrayType",
+                           "bool"   => "Boolean",
+                           "object" => "Object");
 
 
 
@@ -82,24 +82,31 @@ class Fiber extends Base
      * @access public
      * @return array
      */
-    public function get($config = null)
+    public function get($config = array())
     {
         $data = array();
 
-        foreach ($this->getTypes() as $type) {
-            $class      = "\Fiber\\$type";
+        if (is_string($config) && $this->isJson($config)) {
+            $config = json_decode($config, true);
+        }
+
+        $types = $this->getParamList($config, $this->types);
+
+        foreach ($types as $type) {
+            $class      = "\Fiber\\" . $this->types[$type];
             $obj        = new $class();
-            $cfgName    = strtolower($type);
             $typeConfig = array();
 
-            if (isset($config[$cfgName])) {
-                $typeConfig = $config[$cfgName];
+            if (isset($config[$type])) {
+                $typeConfig = $config[$type];
             }
 
             $data[] = $obj->getArray($typeConfig);
         }
 
+        print_r($data);
         $set = call_user_func_array(array($this, "combineParams"), $data);
+
         return $set;
     }
 }
