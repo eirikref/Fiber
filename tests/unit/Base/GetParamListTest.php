@@ -4,17 +4,17 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber\Tests\DataType;
+namespace Fiber\Tests\Base;
 
 /**
- * Fiber: Unit tests for DataType::getGenerators()
+ * Fiber: Unit tests for Base::getGenerators()
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-22
+ * @version    2013-07-25
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class GetGeneratorsTest extends \PHPUnit_Framework_TestCase
+class GetParamListTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -24,17 +24,18 @@ class GetGeneratorsTest extends \PHPUnit_Framework_TestCase
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-22
      * @access public
-     * @covers \Fiber\DataType::getGenerators
+     * @covers \Fiber\Base::getParamList
      */
     public function testIncludeConfigList()
     {
         $config   = array("include" => "true");
+        $valid    = array("true" => "getTrue", "false" => "getFalse");
         $expected = array("true");
         $mock     = $this->getMockForAbstractClass("\Fiber\Boolean");
-        $method   = new \ReflectionMethod($mock, "getGenerators");
+        $method   = new \ReflectionMethod($mock, "getParamList");
         $method->setAccessible(true);
 
-        $res = $method->invokeArgs($mock, array($config));
+        $res = $method->invokeArgs($mock, array($config, $valid));
         $this->assertEquals($expected, $res);
     }
 
@@ -47,17 +48,18 @@ class GetGeneratorsTest extends \PHPUnit_Framework_TestCase
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-22
      * @access public
-     * @covers \Fiber\DataType::getGenerators
+     * @covers \Fiber\Base::getParamList
      */
     public function testExcludeConfigList()
     {
         $config   = array("exclude" => "true");
+        $valid    = array("true" => "getTrue", "false" => "getFalse");
         $expected = array("false");
         $mock     = $this->getMockForAbstractClass("\Fiber\Boolean");
-        $method   = new \ReflectionMethod($mock, "getGenerators");
+        $method   = new \ReflectionMethod($mock, "getParamList");
         $method->setAccessible(true);
 
-        $res = $method->invokeArgs($mock, array($config));
+        $res = $method->invokeArgs($mock, array($config, $valid));
         $this->assertEquals($expected, $res);
     }
 
@@ -70,17 +72,18 @@ class GetGeneratorsTest extends \PHPUnit_Framework_TestCase
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-22
      * @access public
-     * @covers \Fiber\DataType::getGenerators
+     * @covers \Fiber\Base::getParamList
      */
     public function testWithoutConfigList()
     {
         $config   = array();
+        $valid    = array("true" => "getTrue", "false" => "getFalse");
         $expected = array("true", "false");
         $mock     = $this->getMockForAbstractClass("\Fiber\Boolean");
-        $method   = new \ReflectionMethod($mock, "getGenerators");
+        $method   = new \ReflectionMethod($mock, "getParamList");
         $method->setAccessible(true);
 
-        $res = $method->invokeArgs($mock, array($config));
+        $res = $method->invokeArgs($mock, array($config, $valid));
         $this->assertEquals($expected, $res);
     }
 }

@@ -16,7 +16,7 @@ namespace Fiber;
  * @version 2013-07-23
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class Fiber extends Combinable
+class Fiber extends Base
 {
 
     /**

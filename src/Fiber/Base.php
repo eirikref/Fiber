@@ -15,8 +15,22 @@ namespace Fiber;
  * @version 2013-07-24
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-abstract class Combinable
+abstract class Base
 {
+
+    /**
+     * Get generated test data
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-06-28
+     * @access public
+     * @return array
+     *
+     * @param  mixed $config Either an array or JSON
+     */
+    abstract public function get($config = array());
+
+
 
     /**
      * Generate all possible unique combinations of the input
@@ -119,14 +133,69 @@ abstract class Combinable
 
 
     /**
-     * Get generated test data
+     * Parse list of generators found in config
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-06-28
-     * @access public
+     * @since  2013-07-22
+     * @access protected
      * @return array
      *
-     * @param  mixed $config Either an array or JSON
+     * @param  string $configList
      */
-    abstract public function get($config = array());
+    protected function parseConfigList($configList)
+    {
+        $ret  = array();
+
+        if (is_string($configList) && strlen($configList) > 0) {
+            $list = explode(",", $configList);
+
+            foreach ($list as $val) {
+                $ret[] = trim($val);
+            }
+        }
+
+        return $ret;
+    }
+
+
+
+    /**
+     * Get list of valid parameters (generators or data types) for a
+     * given request
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-22
+     * @access protected
+     * @return array
+     *
+     * @param  array $config
+     * @param  array $valid
+     */
+    protected function getParamList(array $config, array $valid)
+    {
+        $ret = array();
+
+        if (isset($config["include"])) {
+            $include = $this->parseConfigList($config["include"]);
+
+            foreach ($include as $gen) {
+                if (isset($valid[$gen])) {
+                    $ret[] = $gen;
+                }
+            }
+        } elseif (isset($config["exclude"])) {
+            $res     = $this->parseConfigList($config["exclude"]);
+            $exclude = array_flip($res);
+            
+            foreach ($valid as $gen => $method) {
+                if (!isset($exclude[$gen])) {
+                    $ret[] = $gen;
+                }
+            }
+        } else {
+            $ret = array_keys($valid);
+        }
+
+        return $ret;
+    }
 }

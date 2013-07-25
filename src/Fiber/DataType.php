@@ -15,7 +15,7 @@ namespace Fiber;
  * @version 2013-07-22
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-abstract class DataType extends Combinable
+abstract class DataType extends Base
 {
     
     /**
@@ -148,7 +148,7 @@ abstract class DataType extends Combinable
         $data = array();
 
         if ($this->validateConfig($config)) {
-            $generators = $this->getGenerators($config);
+            $generators = $this->getParamList($config, $this->generators);
         
             foreach ($generators as $g) {
                 $method = $this->generators[$g];
@@ -160,72 +160,5 @@ abstract class DataType extends Combinable
         }
 
         return $data;
-    }
-
-
-
-    /**
-     * Get list of valid generators for a given request
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-22
-     * @access private
-     * @return array
-     *
-     * @param  array $config
-     */
-    private function getGenerators(array $config)
-    {
-        $ret = array();
-
-        if (isset($config["include"])) {
-            $include = $this->parseConfigList($config["include"]);
-
-            foreach ($include as $gen) {
-                if (isset($this->generators[$gen])) {
-                    $ret[] = $gen;
-                }
-            }
-        } elseif (isset($config["exclude"])) {
-            $res     = $this->parseConfigList($config["exclude"]);
-            $exclude = array_flip($res);
-            
-            foreach ($this->generators as $gen => $method) {
-                if (!isset($exclude[$gen])) {
-                    $ret[] = $gen;
-                }
-            }
-        } else {
-            $ret = array_keys($this->generators);
-        }
-
-        return $ret;
-    }
-
-
-
-    /**
-     * Parse list of generators found in config
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-22
-     * @access private
-     * @return array
-     *
-     * @param  string $configList
-     */
-    private function parseConfigList($configList)
-    {
-        $ret  = array();
-
-        if (is_string($configList) && strlen($configList) > 0) {
-            $list = explode(",", $configList);
-
-            foreach ($list as $val) {
-                $ret[] = trim($val);
-            }
-        }
-
-        return $ret;
     }
 }
