@@ -47,10 +47,10 @@ class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
     public function getEmptyThroughArrayType()
     {
         $exp = array(array(array()));
-        $cfg = json_encode(array("include" => array("empty")));
+        $cfg = json_encode(array("include" => "empty"));
 
-        $gen = new \Fiber\ArrayType($cfg);
-        $this->assertEquals($exp, $gen->get());
+        $gen = new \Fiber\ArrayType();
+        $this->assertEquals($exp, $gen->get($cfg));
     }
 
 
@@ -67,11 +67,11 @@ class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
     public function getEmptyThroughFiber()
     {
         $exp = array(array(array()));
-        $cfg = json_encode(array("include" => array("array"),
-                                 "array"   => array("include" => array("empty"))
+        $cfg = json_encode(array("include" => "array",
+                                 "array"   => array("include" => "empty")
         ));
 
-        $fiber = new \Fiber\Fiber($cfg);
-        $this->assertEquals($exp, $fiber->get());
+        $fiber = new \Fiber\Fiber();
+        $this->assertEquals($exp, $fiber->get($cfg));
     }
 }

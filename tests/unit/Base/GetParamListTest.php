@@ -7,7 +7,7 @@
 namespace Fiber\Tests\Base;
 
 /**
- * Fiber: Unit tests for Base::getGenerators()
+ * Fiber: Unit tests for Base::getParamList()
  *
  * @package    Fiber
  * @subpackage Tests

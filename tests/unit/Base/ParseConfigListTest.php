@@ -4,14 +4,14 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber\Tests\DataType;
+namespace Fiber\Tests\Base;
 
 /**
- * Fiber: Unit tests for DataType::parseConfigList()
+ * Fiber: Unit tests for Base::parseConfigList()
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-22
+ * @version    2013-07-25
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class ParseConfigListTest extends \PHPUnit_Framework_TestCase
@@ -43,7 +43,7 @@ class ParseConfigListTest extends \PHPUnit_Framework_TestCase
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-07-22
      * @access       public
-     * @covers       \Fiber\DataType::parseConfigList
+     * @covers       \Fiber\Base::parseConfigList
      * @dataProvider getConfigListsAndResultSizes
      *
      * @param        string $configList
@@ -51,7 +51,7 @@ class ParseConfigListTest extends \PHPUnit_Framework_TestCase
      */
     public function checkExpectedResultSize($configList, $expSize)
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "parseConfigList");
         $method->setAccessible(true);
 
@@ -93,7 +93,7 @@ class ParseConfigListTest extends \PHPUnit_Framework_TestCase
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-07-22
      * @access       public
-     * @covers       \Fiber\DataType::parseConfigList
+     * @covers       \Fiber\Base::parseConfigList
      * @dataProvider getInvalidConfigLists
      *
      * @param        mixed $invalidParam
@@ -101,7 +101,7 @@ class ParseConfigListTest extends \PHPUnit_Framework_TestCase
     public function invalidParamsShouldResultInEmptyArray($invalid)
     {
         $expected = array();
-        $mock     = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock     = $this->getMockForAbstractClass("\Fiber\Base");
         $method   = new \ReflectionMethod($mock, "parseConfigList");
         $method->setAccessible(true);
         
@@ -142,7 +142,7 @@ class ParseConfigListTest extends \PHPUnit_Framework_TestCase
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-07-22
      * @access       public
-     * @covers       \Fiber\DataType::parseConfigList
+     * @covers       \Fiber\Base::parseConfigList
      * @dataProvider getCommaAndWhitespaceVariations
      *
      * @param        mixed $param
@@ -150,7 +150,7 @@ class ParseConfigListTest extends \PHPUnit_Framework_TestCase
     public function testVariationsInCommaAndWhitespacePlacement($param)
     {
         $expected = array("a", "b");
-        $mock     = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock     = $this->getMockForAbstractClass("\Fiber\Base");
         $method   = new \ReflectionMethod($mock, "parseConfigList");
         $method->setAccessible(true);
         

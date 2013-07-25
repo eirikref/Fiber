@@ -4,14 +4,14 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber\Tests\DataType;
+namespace Fiber\Tests\Base;
 
 /**
- * Fiber: Unit tests for DataType::isJson()
+ * Fiber: Unit tests for Base::isJson()
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-03
+ * @version    2013-07-25
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class IsJsonTest extends \PHPUnit_Framework_TestCase
@@ -42,6 +42,29 @@ class IsJsonTest extends \PHPUnit_Framework_TestCase
 
 
     /**
+     * Make sure non-valid JSON does not pass
+     *
+     * @test
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2013-07-05
+     * @access       public
+     * @covers       \Fiber\Base::isJson
+     * @dataProvider getInvalidJson
+     *
+     * @param        mixed $param Non-JSON payload
+     */
+    public function checkNonJson($param)
+    {
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
+        $method = new \ReflectionMethod($mock, "isJson");
+        $method->setAccessible(true);
+
+        $this->assertFalse($method->invokeArgs($mock, array($param)));
+    }
+
+
+
+    /**
      * Data provider for valid JSON
      * 
      * @author Eirik Refsdal <eirikref@gmail.com>
@@ -59,36 +82,23 @@ class IsJsonTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Make sure non-valid JSON does not pass
-     *
-     * @test
-     * @covers       \Fiber\DataType::isJson
-     * @dataProvider getInvalidJson
-     */
-    public function checkNonJson($param)
-    {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
-        $method = new \ReflectionMethod($mock, "isJson");
-        
-        $method->setAccessible(true);
-        $this->assertFalse($method->invokeArgs($mock, array($param)));
-    }
-
-
-
-    /**
      * Make sure valid JSON passes
      *
      * @test
-     * @covers       \Fiber\DataType::isJson
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2013-07-05
+     * @access       public
+     * @covers       \Fiber\Base::isJson
      * @dataProvider getValidJson
+     *
+     * @param        string $param JSON payload
      */
     public function checkJson($param)
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "isJson");
-        
         $method->setAccessible(true);
+
         $this->assertTrue($method->invokeArgs($mock, array($param)));
     }
 }

@@ -11,26 +11,46 @@ namespace Fiber\Tests\Fiber;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-20
+ * @version    2013-07-25
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class GetTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Basic test of Fiber::get()
+     * Test with invalid config
      *
      * @test
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-20
+     * @since  2013-07-25
      * @access public
      * @covers \Fiber\Fiber::get
      */
-    public function simpleGet()
+    public function getWithInvalidConfig()
     {
-        $fiber = new \Fiber\Fiber();
-        $exp   = array(array(array()));
+        $fiber  = new \Fiber\Fiber();
+        $config = array("include" => "bool", "exclude" => "bool");
 
-        $this->assertEquals($exp, $fiber->get());
+        $this->assertNull($fiber->get($config));
+    }
+
+
+
+    /**
+     * Test with datatype sub-config
+     *
+     * @test
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-25
+     * @access public
+     * @covers \Fiber\Fiber::get
+     */
+    public function getWithSubConfig()
+    {
+        $fiber    = new \Fiber\Fiber();
+        $config   = array("include" => "bool", "bool" => array("include" => "true"));
+        $expected = array(array(true));
+
+        $this->assertEquals($expected, $fiber->get($config));
     }
 }

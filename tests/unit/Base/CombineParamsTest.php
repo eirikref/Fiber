@@ -11,7 +11,7 @@ namespace Fiber\Tests\Base;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-19
+ * @version    2013-07-25
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class CombineParamsTest extends \PHPUnit_Framework_TestCase
