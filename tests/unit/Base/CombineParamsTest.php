@@ -4,10 +4,10 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber\Tests\DataType;
+namespace Fiber\Tests\Base;
 
 /**
- * Fiber: Unit tests for DataType::combineParams()
+ * Fiber: Unit tests for Base::combineParams()
  *
  * @package    Fiber
  * @subpackage Tests
@@ -53,12 +53,12 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-07-05
      * @access       public
-     * @covers       \Fiber\DataType::combineParams
+     * @covers       \Fiber\Base::combineParams
      * @dataProvider getBasicCombinationData
      */
     public function basicCombination($params, $expected)
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "combineParams");
         
         $method->setAccessible(true);
@@ -108,12 +108,12 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-07-13
      * @access       public
-     * @covers       \Fiber\DataType::combineParams
+     * @covers       \Fiber\Base::combineParams
      * @dataProvider getComplexCombinationData
      */
     public function complexCombination($params, $expected)
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "combineParams");
         
         $method->setAccessible(true);
@@ -154,12 +154,12 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-07-14
      * @access       public
-     * @covers       \Fiber\DataType::prependValue
+     * @covers       \Fiber\Base::prependValue
      * @dataProvider getPrependValueData
      */
     public function testPrependValue($params, $expected)
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "prependValue");
 
         $method->setAccessible(true);
@@ -205,12 +205,12 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-07-14
      * @access       public
-     * @covers       \Fiber\DataType::prependArray
+     * @covers       \Fiber\Base::prependArray
      * @dataProvider getPrependArrayData
      */
     public function testPrependArray($params, $expected)
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "prependArray");
 
         $method->setAccessible(true);
@@ -226,11 +226,11 @@ class CombineParamsTest extends \PHPUnit_Framework_TestCase
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-07-19
      * @access public
-     * @covers \Fiber\DataType::combineParams
+     * @covers \Fiber\Base::combineParams
      */
     public function combineEmptyArray()
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "combineParams");
         $method->setAccessible(true);
 
