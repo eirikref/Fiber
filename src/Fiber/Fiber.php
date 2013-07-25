@@ -32,34 +32,6 @@ class Fiber extends Base
 
 
     /**
-     * Validate configuration array
-     *
-     * FIXME: Should have some sort of proper error logging and
-     * handling instead of just returning false
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-23
-     * @access protected
-     * @return boolean
-     *
-     * @param  array $config Configuration data
-     */
-    protected function validateConfig(array $config)
-    {
-        if (0 == count($config)) {
-            return true;
-        }
-
-        if (isset($config["include"]) && isset($config["exclude"])) {
-            return false;
-        }
-
-        return true;
-    }
-
-
-
-    /**
      * Helper method for getting list of registered data types
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
@@ -90,22 +62,29 @@ class Fiber extends Base
             $config = json_decode($config, true);
         }
 
-        $types = $this->getParamList($config, $this->types);
-
-        foreach ($types as $type) {
-            $class      = "\Fiber\\" . $this->types[$type];
-            $obj        = new $class();
-            $typeConfig = array();
-
-            if (isset($config[$type])) {
-                $typeConfig = $config[$type];
+        if (is_array($config) && $this->validateConfig($config)) {
+            $types = $this->getParamList($config, $this->types);
+            
+            foreach ($types as $type) {
+                $class      = "\Fiber\\" . $this->types[$type];
+                $obj        = new $class();
+                $typeConfig = array();
+                
+                // FIXME: Need error handling here if it is NOT an
+                // array, which means that the user supplied config is
+                // wrong and we should not just swallow the error and
+                // move on without notifying the end-user
+                if (isset($config[$type]) && is_array($config[$type])) {
+                    $typeConfig = $config[$type];
+                }
+                
+                $data[] = $obj->getArray($typeConfig);
             }
-
-            $data[] = $obj->getArray($typeConfig);
+            
+            $set = $this->combineParams($data);
+            return $set;
         }
 
-        $set = call_user_func_array(array($this, "combineParams"), $data);
-
-        return $set;
+        return null;
     }
 }
