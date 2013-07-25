@@ -29,7 +29,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
     public function simpleGet()
     {
         $fiber  = new \Fiber\Fiber();
-        $config = '{ "include": "boolean, array, object" }';
+        $config = '{ "include": "bool, array, object" }';
         $exp    = array(array(true,  array(), new \StdClass()),
                         array(false, array(), new \StdClass()));
 
