@@ -33,6 +33,31 @@ abstract class Base
 
 
     /**
+     * Check if passed string is JSON
+     *
+     * FIXME: This should not really be here (it should not have to),
+     * but for now there just isn't a better place for it.
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-03
+     * @access protected
+     * @return boolean
+     *
+     * @param  string $json JSON data
+     */
+    protected function isJson($json)
+    {
+        if (!is_string($json)) {
+            return false;
+        }
+
+        json_decode($json);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+
+
+
+    /**
      * Generate all possible unique combinations of the input
      * parameters
      *
