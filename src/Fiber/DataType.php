@@ -30,31 +30,6 @@ abstract class DataType extends Base
 
 
     /**
-     * Validate configuration array
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-03
-     * @access protected
-     * @return boolean
-     *
-     * @param  array $config Configuration data
-     */
-    protected function validateConfig(array $config)
-    {
-        if (0 == count($config)) {
-            return true;
-        }
-
-        if (isset($config["include"]) && isset($config["exclude"])) {
-            return false;
-        }
-
-        return true;
-    }
-
-
-
-    /**
      * Get generated test data
      *
      * Default implementation. Override in subclasses as necessary.
@@ -93,17 +68,15 @@ abstract class DataType extends Base
             $config = json_decode($config, true);
         }
 
-        if (!is_array($config)) {
-            // Do something
+        if (is_array($config)) {
+            $raw = $this->getArray($config);
+            if (is_array($raw) && count($raw) > 0) {
+                $set = $this->combineParams($raw);
+                return $set;
+            }
         }
-
-        $raw = $this->getArray($config);
-        if (is_array($raw) && count($raw) > 0) {
-            $set = $this->combineParams($raw);
-            return $set;
-        } else {
-            // Do some sort of error logging
-        }
+  
+        return null;
     }
 
 
