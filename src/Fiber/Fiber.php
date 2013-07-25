@@ -104,7 +104,6 @@ class Fiber extends Base
             $data[] = $obj->getArray($typeConfig);
         }
 
-        print_r($data);
         $set = call_user_func_array(array($this, "combineParams"), $data);
 
         return $set;
