@@ -223,4 +223,32 @@ abstract class Base
 
         return $ret;
     }
+
+
+
+    /**
+     * Validate configuration array
+     *
+     * FIXME: Should have some sort of proper error logging and
+     * handling instead of just returning false
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-07-23
+     * @access protected
+     * @return boolean
+     *
+     * @param  array $config Configuration data
+     */
+    protected function validateConfig(array $config)
+    {
+        if (0 == count($config)) {
+            return true;
+        }
+
+        if (isset($config["include"]) && isset($config["exclude"])) {
+            return false;
+        }
+
+        return true;
+    }
 }

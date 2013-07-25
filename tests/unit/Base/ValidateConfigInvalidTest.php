@@ -4,14 +4,14 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber\Tests\DataType;
+namespace Fiber\Tests\Base;
 
 /**
- * Fiber: Unit tests for DataType::validateConfig()
+ * Fiber: Unit tests for Base::validateConfig()
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-10
+ * @version    2013-07-25
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class ValidateConfigInvalidTest extends \PHPUnit_Framework_TestCase
@@ -51,13 +51,15 @@ class ValidateConfigInvalidTest extends \PHPUnit_Framework_TestCase
      * @author            Eirik Refsdal <eirikref@gmail.com>
      * @since             2013-07-10
      * @access            public
-     * @covers            \Fiber\DataType::validateConfig
+     * @covers            \Fiber\Base::validateConfig
      * @expectedException PHPUnit_Framework_Error
      * @dataProvider      getNonArrayParams
+     *
+     * @param             mixed $param Non-array parameter
      */
     public function CheckInvalidParams($param)
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "validateConfig");
         $method->setAccessible(true);
 
@@ -91,12 +93,14 @@ class ValidateConfigInvalidTest extends \PHPUnit_Framework_TestCase
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-07-23
      * @access       public
-     * @covers       \Fiber\DataType::validateConfig
+     * @covers       \Fiber\Base::validateConfig
      * @dataProvider getInvalidContents
+     *
+     * @param        mixed $param Non-valid config
      */
     public function CheckInvalidContents($param)
     {
-        $mock   = $this->getMockForAbstractClass("\Fiber\DataType");
+        $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "validateConfig");
         $method->setAccessible(true);
 
