@@ -25,10 +25,6 @@ $cfg  = '{"include": "integer, float"}';
 $data = $fiber->get($cfg);
 
 // Another thought
-$fiber->validate("string", "length: 1-32, charset: utf8");
-$fiber->invalidate("string", "length: 1-32, charset: utf8");
+$fiber->getOnly("string", "length: 1-32, charset: utf8");
+$fiber->getAnythingBut("string", "length: 1-32, charset: utf8");
 ```
-
-Maybe the names in the last example needs to be better, but the
-thought is "give me only things like this" and "give me anything but
-this"...
