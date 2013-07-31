@@ -87,35 +87,4 @@ class Fiber extends Base
 
         return null;
     }
-
-
-
-    /**
-     * Helper method
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-29
-     * @access public
-     * @return array
-     */
-    public function getOnly($types, $config = null)
-    {
-        // * Parse types (if we support multiple types here?)
-    }
-
-
-
-    /**
-     * Helper method
-     *
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-29
-     * @access public
-     * @return array
-     */
-    public function getAnythingBut($types, $config = null)
-    {
-    }
-
-    
 }

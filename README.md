@@ -23,8 +23,4 @@ $data = $fiber->get($cfg);
 // Only include integers and floats
 $cfg  = '{"include": "integer, float"}';
 $data = $fiber->get($cfg);
-
-// Another thought
-$fiber->getOnly("string", "length: 1-32, charset: utf8");
-$fiber->getAnythingBut("string", "length: 1-32, charset: utf8");
 ```
