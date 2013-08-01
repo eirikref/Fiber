@@ -24,3 +24,18 @@ $data = $fiber->get($cfg);
 $cfg  = '{"include": "integer, float"}';
 $data = $fiber->get($cfg);
 ```
+
+Possible short-hand config syntax
+```
+// Get just strings
+$cfg  = "string";
+$data = $fiber->get($cfg);
+
+// Get anything but strings
+$cfg  = "!string";
+$data = $fiber->get($cfg);
+
+// Get only strings of length 1-32
+$cfg  = "string<1-32>";
+$data = $fiber->get($cfg);
+```
