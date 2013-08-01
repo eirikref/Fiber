@@ -26,7 +26,7 @@ $data = $fiber->get($cfg);
 ```
 
 Possible short-hand config syntax
-```
+```php
 // Get just strings
 $cfg  = "string";
 $data = $fiber->get($cfg);
