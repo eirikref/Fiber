@@ -7,12 +7,12 @@
 namespace Fiber;
 
 /**
- * Fiber: Combinable
+ * Fiber: Base
  *
  * Abstract superclass for DataType and the top-level Fiber
  *
  * @package Fiber
- * @version 2013-07-24
+ * @version 2013-08-05
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class Base
