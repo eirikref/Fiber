@@ -29,7 +29,7 @@ class GetTypesTest extends \PHPUnit_Framework_TestCase
     public function getDefaultTypes()
     {
         $fiber   = new \Fiber\Fiber();
-        $defSize = 3;
+        $defSize = 4;
 
         $this->assertTrue(is_array($fiber->getTypes()));
         $this->assertEquals($defSize, count($fiber->getTypes()));

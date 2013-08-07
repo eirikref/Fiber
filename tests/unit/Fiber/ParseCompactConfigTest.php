@@ -105,4 +105,30 @@ class ParseCompactConfigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $res);
     }
+
+
+
+    /**
+     * Strings with sub-config
+     *
+     * @test
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-08-05
+     * @access public
+     * @covers \Fiber\Fiber::parseCompactConfig
+     */
+    public function getStringsWithSubConfig()
+    {
+        $config   = "string<1-32>";
+        $expected = array("include" => "string",
+                          "string"  => array("min" => 1,
+                                             "max" => 32));
+        $mock     = $this->getMockForAbstractClass("\Fiber\Fiber");
+        $method   = new \ReflectionMethod($mock, "parseCompactConfig");
+        $method->setAccessible(true);
+
+        $res = $method->invokeArgs($mock, array($config));
+
+        $this->assertEquals($expected, $res);
+    }
 }
