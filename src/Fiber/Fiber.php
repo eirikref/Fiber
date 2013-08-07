@@ -27,7 +27,8 @@ class Fiber extends Base
      */
     private $types = array("array"  => "ArrayType",
                            "bool"   => "Boolean",
-                           "object" => "Object");
+                           "object" => "Object",
+                           "string" => "String");
 
 
 
@@ -70,9 +71,9 @@ class Fiber extends Base
         $type    = null;
         $opts    = null;
         $include = true;
-        $pattern = "/^([^<]+(<([^>]+)>)?)$/i";
+        $pattern = "/^([^<]+)(<([^>]+)>)?$/i";
 
-        if (strlen($config) < 1 || strlen($config) > 128) {
+        if (!is_string($config) || strlen($config) < 1 || strlen($config) > 128) {
             return $data;
         }
 
@@ -101,7 +102,7 @@ class Fiber extends Base
             if (isset($opts)) {
                 $ret = $this->parseCompactOptions($opts);
                 if (array($ret)) {
-                    $data[$type] = $opts;
+                    $data[$type] = $ret;
                 }
             }
         }
@@ -125,7 +126,7 @@ class Fiber extends Base
         $rangePattern   = "/^([0-9]+)-([0-9]+)$/";
         $charsetPattern = "/^(utf8|latin1)$/";
 
-        if (strlen($opts) < 1 || strlen($opts) > 128) {
+        if (!is_string($opts) || strlen($opts) < 1 || strlen($opts) > 128) {
             return;
         }
 
@@ -180,7 +181,7 @@ class Fiber extends Base
                 
                 $data[] = $obj->getArray($typeConfig);
             }
-            
+
             $set = $this->combineParams($data);
             return $set;
         }
