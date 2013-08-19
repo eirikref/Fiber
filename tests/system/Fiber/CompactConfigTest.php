@@ -11,7 +11,7 @@ namespace Fiber\Tests\Fiber;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-08-05
+ * @version    2013-08-19
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class CompactConfigTest extends \PHPUnit_Framework_TestCase
@@ -23,7 +23,7 @@ class CompactConfigTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-08-05
+     * @since  2013-08-19
      * @access public
      * @covers \Fiber\Fiber::get
      */

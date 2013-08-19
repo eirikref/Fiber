@@ -12,7 +12,7 @@ namespace Fiber;
  * Abstract superclass for DataType and the top-level Fiber
  *
  * @package Fiber
- * @version 2013-08-05
+ * @version 2013-08-19
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class Base
@@ -28,7 +28,7 @@ abstract class Base
      *
      * @param  mixed $config Either an array or JSON
      */
-    abstract public function get($config = array());
+    abstract public function get();
 
 
 

@@ -11,7 +11,7 @@ namespace Fiber\Tests\Fiber;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-08-05
+ * @version    2013-08-19
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class ParseCompactConfigTest extends \PHPUnit_Framework_TestCase
@@ -27,7 +27,7 @@ class ParseCompactConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function getInvalidCompactConfig()
     {
-        return array(array("",),
+        return array(array(""),
                      array("doesnotexist")
         );
     }
@@ -48,7 +48,7 @@ class ParseCompactConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function makeSureInvalidParamsFail($config)
     {
-        $expected = array();
+        $expected = array("value" => $config);
         $mock     = $this->getMockForAbstractClass("\Fiber\Fiber");
         $method   = new \ReflectionMethod($mock, "parseCompactConfig");
         $method->setAccessible(true);
