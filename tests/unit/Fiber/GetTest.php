@@ -11,7 +11,7 @@ namespace Fiber\Tests\Fiber;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-25
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class GetTest extends \PHPUnit_Framework_TestCase
@@ -32,6 +32,23 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $config = array("include" => "bool", "exclude" => "bool");
 
         $this->assertNull($fiber->get($config));
+    }
+
+
+
+    /**
+     * Test that it fails when there is no supplied config
+     *
+     * @test
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-08-20
+     * @access public
+     * @covers \Fiber\Fiber::get
+     */
+    public function getWithoutConfig()
+    {
+        $fiber = new \Fiber\Fiber();
+        $this->assertNull($fiber->get());
     }
 
 
