@@ -11,10 +11,10 @@ namespace Fiber\Tests\ArrayType;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-19
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
+class GetEmptyArrayTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -67,9 +67,9 @@ class getEmptyArrayTest extends \PHPUnit_Framework_TestCase
     public function getEmptyThroughFiber()
     {
         $exp = array(array(array()));
-        $cfg = json_encode(array("include" => "array",
-                                 "array"   => array("include" => "empty")
-        ));
+        $raw = array("include" => "array",
+                     "array"   => array("include" => "empty"));
+        $cfg = json_encode($raw);
 
         $fiber = new \Fiber\Fiber();
         $this->assertEquals($exp, $fiber->get($cfg));

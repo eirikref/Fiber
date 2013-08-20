@@ -11,7 +11,7 @@ namespace Fiber\Tests\Base;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-25
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class ValidateConfigValidTest extends \PHPUnit_Framework_TestCase
@@ -47,7 +47,7 @@ class ValidateConfigValidTest extends \PHPUnit_Framework_TestCase
      *
      * @param        array $param
      */
-    public function CheckValidParams($param)
+    public function checkValidParams($param)
     {
         $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "validateConfig");

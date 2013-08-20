@@ -11,7 +11,7 @@ namespace Fiber\Tests\Fiber;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-08-05
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class ParseCompactOptionsTest extends \PHPUnit_Framework_TestCase
@@ -25,11 +25,10 @@ class ParseCompactOptionsTest extends \PHPUnit_Framework_TestCase
      * @access public
      * @return array
      */
-    public function Dynamic_getInvalidParams()
+    public function getInvalidParamsDynamic()
     {
         $fiber = new \Fiber\Fiber();
         return $fiber->get("!string<1-128>");
-        // print_r($tmp);
     }
 
 
@@ -42,11 +41,11 @@ class ParseCompactOptionsTest extends \PHPUnit_Framework_TestCase
      * @since        2013-08-05
      * @access       public
      * @covers       \Fiber\Fiber::parseCompactOptions
-     * @dataProvider Dynamic_getInvalidParams
+     * @dataProvider getInvalidParamsDynamic
      *
      * @param        string $config
      */
-    public function Dynamic_makeSureInvalidParamsFail($config)
+    public function makeSureInvalidParamsFailDynamic($config)
     {
         $mock   = $this->getMockForAbstractClass("\Fiber\Fiber");
         $method = new \ReflectionMethod($mock, "parseCompactOptions");

@@ -11,7 +11,7 @@ namespace Fiber\Tests\Base;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-25
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class ValidateConfigInvalidTest extends \PHPUnit_Framework_TestCase
@@ -57,7 +57,7 @@ class ValidateConfigInvalidTest extends \PHPUnit_Framework_TestCase
      *
      * @param             mixed $param Non-array parameter
      */
-    public function CheckInvalidParams($param)
+    public function checkInvalidParams($param)
     {
         $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "validateConfig");
@@ -98,7 +98,7 @@ class ValidateConfigInvalidTest extends \PHPUnit_Framework_TestCase
      *
      * @param        mixed $param Non-valid config
      */
-    public function CheckInvalidContents($param)
+    public function checkInvalidContents($param)
     {
         $mock   = $this->getMockForAbstractClass("\Fiber\Base");
         $method = new \ReflectionMethod($mock, "validateConfig");

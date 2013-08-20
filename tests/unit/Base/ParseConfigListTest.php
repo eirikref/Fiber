@@ -11,7 +11,7 @@ namespace Fiber\Tests\Base;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-25
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class ParseConfigListTest extends \PHPUnit_Framework_TestCase
@@ -156,5 +156,4 @@ class ParseConfigListTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals($expected, $method->invokeArgs($mock, array($param)));
     }
-
 }

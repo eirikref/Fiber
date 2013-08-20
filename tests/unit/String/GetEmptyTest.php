@@ -4,17 +4,17 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber\Tests\Object;
+namespace Fiber\Tests\String;
 
 /**
  * Fiber: Unit tests for String::getEmpty()
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-18
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class getEmptyTest extends \PHPUnit_Framework_TestCase
+class GetEmptyTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

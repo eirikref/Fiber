@@ -8,4 +8,4 @@ test:
 	$(PHPUNIT) --coverage-html ./report
 
 sniff:
-	$(PHPCS) --standard=PSR2 ./src
+	$(PHPCS) --standard=PSR2 ./src ./tests

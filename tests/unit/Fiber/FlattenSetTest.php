@@ -11,14 +11,16 @@ namespace Fiber\Tests\Fiber;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-08-19
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class FlattenSetTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Simple test
+     * Simple test of flattenSet just to see that it does what is
+     * expected when the stars are aligned (and the input is
+     * straightforward).
      *
      * @test
      * @author Eirik Refsdal <eirikref@gmail.com>

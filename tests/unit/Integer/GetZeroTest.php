@@ -11,10 +11,10 @@ namespace Fiber\Tests\Integer;
  *
  * @package    Fiber
  * @subpackage Tests
- * @version    2013-07-18
+ * @version    2013-08-20
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class getZeroTest extends \PHPUnit_Framework_TestCase
+class GetZeroTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
