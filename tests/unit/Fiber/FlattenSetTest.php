@@ -40,4 +40,47 @@ class FlattenSetTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $res);
     }
+
+
+
+    /**
+     * Data provider for invalid input
+     * 
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-08-20
+     * @access public
+     * @return array
+     */
+    public function getInvalidParamsDynamic()
+    {
+        $fiber = new \Fiber\Fiber();
+        return $fiber->get("!array");
+    }
+
+
+
+    /**
+     * Test that things fails when supplying other data types than
+     * arrays
+     *
+     * @test
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2013-08-20
+     * @access       public
+     * @covers       \Fiber\Fiber::flattenSet
+     * @dataProvider getInvalidParamsDynamic
+     *
+     * @param        mixed $in
+     */
+    public function testNonArrayParams($in)
+    {
+        $expected = array();
+        $mock     = $this->getMockForAbstractClass("\Fiber\Fiber");
+        $method   = new \ReflectionMethod($mock, "flattenSet");
+        $method->setAccessible(true);
+
+        $res = $method->invokeArgs($mock, array($in));
+
+        $this->assertEquals($expected, $res);
+    }
 }

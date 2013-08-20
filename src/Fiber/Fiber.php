@@ -13,7 +13,7 @@ namespace Fiber;
  * Main class used for generating data of multiple data types
  *
  * @package Fiber
- * @version 2013-08-19
+ * @version 2013-08-20
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Fiber extends Base
@@ -201,8 +201,6 @@ class Fiber extends Base
             }
         }
 
-        // print_r($data);
-
         if (count($data) > 1) {
             return $this->combineParams($data);
         } elseif (1 == count($data)) {
@@ -216,17 +214,31 @@ class Fiber extends Base
         }
     }
 
+
+
+    /**
+     * Flatten set
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-08-29
+     * @access public
+     * @return array
+     *
+     * @param  array $in
+     */
     private function flattenSet($in)
     {
         $out = array();
 
-        foreach ($in as $val) {
-            if (is_array($val)) {
-                foreach ($val as $b) {
-                    $out[] = $b;
+        if (is_array($in)) {
+            foreach ($in as $val) {
+                if (is_array($val)) {
+                    foreach ($val as $b) {
+                        $out[] = $b;
+                    }
+                } else {
+                    $out[] = $val;
                 }
-            } else {
-                $out[] = $val;
             }
         }
 
