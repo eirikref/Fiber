@@ -18,14 +18,14 @@ class ParseCompactConfigTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Data provider for invalid compact config format strings
+     * Data provider for static strings
      * 
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-08-05
      * @access public
      * @return array
      */
-    public function getInvalidCompactConfig()
+    public function getStaticStrings()
     {
         return array(array(""),
                      array("doesnotexist")
@@ -35,20 +35,63 @@ class ParseCompactConfigTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Make sure invalid config formats fail
+     * Make sure static strings not matching data types just pass
+     * through
      *
      * @test
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2013-08-05
      * @access       public
      * @covers       \Fiber\Fiber::parseCompactConfig
-     * @dataProvider getInvalidCompactConfig
+     * @dataProvider getStaticStrings
      *
      * @param        string $config
      */
-    public function makeSureInvalidParamsFail($config)
+    public function makeSureStaticStringsPassThrough($config)
     {
         $expected = array("value" => $config);
+        $mock     = $this->getMockForAbstractClass("\Fiber\Fiber");
+        $method   = new \ReflectionMethod($mock, "parseCompactConfig");
+        $method->setAccessible(true);
+
+        $res = $method->invokeArgs($mock, array($config));
+
+        $this->assertEquals($expected, $res);
+    }
+
+
+
+    /**
+     * Dynamic data provider for invalid config
+     * 
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2013-08-20
+     * @access public
+     * @return array
+     */
+    public function getInvalidConfigDynamic()
+    {
+        $fiber = new \Fiber\Fiber();
+        return $fiber->get("!string");
+    }
+
+
+
+    /**
+     * Make sure invalid config fails and returns an empty array
+     *
+     * @test
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2013-08-20
+     * @access       public
+     * @covers       \Fiber\Fiber::parseCompactConfig
+     * @dataProvider getInvalidConfigDynamic
+     *
+     * @param        string $config
+     */
+    public function makeSureInvalidConfigFails($config)
+    {
+        $expected = array();
         $mock     = $this->getMockForAbstractClass("\Fiber\Fiber");
         $method   = new \ReflectionMethod($mock, "parseCompactConfig");
         $method->setAccessible(true);
