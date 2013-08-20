@@ -64,13 +64,14 @@ class FlattenSetTest extends \PHPUnit_Framework_TestCase
      * arrays
      *
      * @test
-     * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2013-08-20
-     * @access       public
-     * @covers       \Fiber\Fiber::flattenSet
-     * @dataProvider getInvalidParamsDynamic
+     * @author            Eirik Refsdal <eirikref@gmail.com>
+     * @since             2013-08-20
+     * @access            public
+     * @covers            \Fiber\Fiber::flattenSet
+     * @expectedException PHPUnit_Framework_Error
+     * @dataProvider      getInvalidParamsDynamic
      *
-     * @param        mixed $in
+     * @param             mixed $in
      */
     public function testNonArrayParams($in)
     {

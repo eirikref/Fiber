@@ -220,25 +220,23 @@ class Fiber extends Base
      * Flatten set
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-08-29
-     * @access public
+     * @since  2013-08-19
+     * @access private
      * @return array
      *
      * @param  array $in
      */
-    private function flattenSet($in)
+    private function flattenSet(array $in)
     {
         $out = array();
 
-        if (is_array($in)) {
-            foreach ($in as $val) {
-                if (is_array($val)) {
-                    foreach ($val as $b) {
-                        $out[] = $b;
-                    }
-                } else {
-                    $out[] = $val;
+        foreach ($in as $val) {
+            if (is_array($val)) {
+                foreach ($val as $b) {
+                    $out[] = $b;
                 }
+            } else {
+                $out[] = $val;
             }
         }
 
