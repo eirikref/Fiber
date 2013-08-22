@@ -9,3 +9,7 @@ test:
 
 sniff:
 	$(PHPCS) --standard=PSR2 ./src ./tests
+
+clean:
+	@rm -rf ./report
+
