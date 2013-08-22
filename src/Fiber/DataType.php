@@ -12,7 +12,7 @@ namespace Fiber;
  * Base class for all the different available data types
  *
  * @package Fiber
- * @version 2013-07-22
+ * @version 2013-08-21
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 abstract class DataType extends Base
@@ -26,6 +26,14 @@ abstract class DataType extends Base
      * @access protected
      */
     protected $generators = array();
+
+    /**
+     * Data type specific config
+     *
+     * @var    array $config
+     * @access protected
+     */
+    protected $config = array();
 
 
 
@@ -96,7 +104,8 @@ abstract class DataType extends Base
         $data = array();
 
         if ($this->validateConfig($config)) {
-            $generators = $this->getParamList($config, $this->generators);
+            $generators   = $this->getParamList($config, $this->generators);
+            $this->config = $config;
         
             foreach ($generators as $g) {
                 $method = $this->generators[$g];
