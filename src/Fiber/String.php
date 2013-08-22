@@ -19,24 +19,51 @@ namespace Fiber;
  *           (!?;:, etc.), password (fix of small, caps, numbers,
  *           etc.)
  *
+ *          - UTF-8, UTF with bad enconding, UTF-8 bad declaration, UTF-8
+ *            with chars that are invalid in XML.
+ *
  * @package Fiber
- * @version 2013-06-27
+ * @version 2013-08-22
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class String extends DataType
 {
 
     /**
-     * Get object
+     * List of available generators for the given data type, with
+     * their corresponding action/method
+     *
+     * @var    array $generators
+     * @access protected
+     */
+    protected $generators = array("zero" => "getZero");
+
+
+    /**
+     * Generate string
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-27
-     * @access private
+     * @access public
      * @return string
      */
-    /* private function generateString($length, $charset, $mode) */
-    /* { */
-    /* } */
+    public function generateString($length)
+    {
+        $ret = "";
+
+        if (!is_int($length) || $length < 1) {
+            return $ret;
+        }
+
+        for ($i = 0; $i < $length; ++$i) {
+            $val  = rand(32, 126);
+            $char = chr($val);
+            
+            $ret .= $char;
+        }
+
+        return $ret;
+    }
 
 
 
