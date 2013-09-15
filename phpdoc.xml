@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor>
+    <parser>
+        <default-package-name>Default</default-package-name>
+        <encoding>utf-8</encoding>
+        <target>phpdoc</target>
+        <markers>
+            <item>TODO</item>
+            <item>FIXME</item>
+        </markers>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+        <visibility></visibility>
+    </parser>
+    <files>
+        <directory>src/Fiber</directory>
+        <ignore-hidden>on</ignore-hidden>
+        <ignore-symlinks>on</ignore-symlinks>
+    </files>
+    <transformer>
+        <target>phpdoc</target>
+    </transformer>
+    <logging>
+        <level>quiet</level>
+        <paths>
+            <default>phpdoc-{DATE}.log</default>
+            <errors>phpdoc-{DATE}.errors.log</errors>
+        </paths>
+    </logging>
+    <transformations>
+        <template name="clean"/>
+    </transformations>
+</phpdocumentor>

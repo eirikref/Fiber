@@ -1,23 +1,23 @@
 <?php
 /**
- * Fiber: Integer
+ * Fiber: Array
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber;
+namespace Fiber\DataType;
 
 /**
- * Fiber: Integer
+ * Fiber: Array
  *
- * Class for generating integer test data
+ * Class for generating array test data
  *
  * @package Fiber
- * @version 2013-07-18
+ * @version 2013-07-15
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class Integer extends DataType
+class MyArray extends \Fiber\DataType
 {
-
+    
     /**
      * List of available generators for the given data type, with
      * their corresponding action/method
@@ -25,20 +25,22 @@ class Integer extends DataType
      * @var    array $generators
      * @access protected
      */
-    protected $generators = array("zero"  => "getZero");
+    protected $generators = array("empty" => "getEmpty");
 
 
 
     /**
-     * Get zero
+     * Get an empty array
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-18
+     * @since  2013-07-15
      * @access public
-     * @return integer
+     * @return array
+     *
+     * @param  mixed $config Generator configuration
      */
-    public function getZero()
+    public static function getEmpty()
     {
-        return 0;
+        return array();
     }
 }

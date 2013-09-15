@@ -4,7 +4,7 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber;
+namespace Fiber\DataType;
 
 /**
  * Fiber: Null
@@ -15,7 +15,7 @@ namespace Fiber;
  * @version 2013-07-18
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class Null extends DataType
+class Null extends \Fiber\DataType
 {
     
     /**

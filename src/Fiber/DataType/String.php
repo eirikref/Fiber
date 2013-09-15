@@ -4,7 +4,7 @@
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber;
+namespace Fiber\DataType;
 
 /**
  * Fiber: String
@@ -26,7 +26,7 @@ namespace Fiber;
  * @version 2013-08-22
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class String extends DataType
+class String extends \Fiber\DataType
 {
 
     /**

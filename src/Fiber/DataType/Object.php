@@ -1,23 +1,23 @@
 <?php
 /**
- * Fiber: Array
+ * Fiber: Object
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber;
+namespace Fiber\DataType;
 
 /**
- * Fiber: Array
+ * Fiber: Object
  *
- * Class for generating array test data
+ * Class for generating object test data
  *
  * @package Fiber
- * @version 2013-07-15
+ * @version 2013-07-18
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class ArrayType extends DataType
+class Object extends \Fiber\DataType
 {
-    
+
     /**
      * List of available generators for the given data type, with
      * their corresponding action/method
@@ -25,22 +25,20 @@ class ArrayType extends DataType
      * @var    array $generators
      * @access protected
      */
-    protected $generators = array("empty" => "getEmpty");
+    protected $generators = array("stdclass"  => "getStdClass");
 
 
 
     /**
-     * Get an empty array
+     * Get object
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-07-15
+     * @since  2013-06-27
      * @access public
-     * @return array
-     *
-     * @param  mixed $config Generator configuration
+     * @return object
      */
-    public static function getEmpty()
+    public static function getStdClass()
     {
-        return array();
+        return new \stdClass();
     }
 }

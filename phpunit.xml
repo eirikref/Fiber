@@ -2,9 +2,9 @@
          bootstrap="phpunit-bootstrap.php"
          verbose="true">
   <testsuites>
-    <testsuite name="Fiber Unit Tests">
+    <!-- testsuite name="Fiber Unit Tests">
       <directory>tests/unit/</directory>
-    </testsuite>
+    </testsuite -->
     <testsuite name="Fiber System Tests">
       <directory>tests/system/</directory>
     </testsuite>

@@ -1,21 +1,21 @@
 <?php
 /**
- * Fiber: Object
+ * Fiber: Integer
  * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Fiber;
+namespace Fiber\DataType;
 
 /**
- * Fiber: Object
+ * Fiber: Integer
  *
- * Class for generating object test data
+ * Class for generating integer test data
  *
  * @package Fiber
  * @version 2013-07-18
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class Object extends \Fiber\DataType
+class Integer extends \Fiber\DataType
 {
 
     /**
@@ -25,20 +25,20 @@ class Object extends \Fiber\DataType
      * @var    array $generators
      * @access protected
      */
-    protected $generators = array("stdclass"  => "getStdClass");
+    protected $generators = array("zero"  => "getZero");
 
 
 
     /**
-     * Get object
+     * Get zero
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2013-06-27
+     * @since  2013-07-18
      * @access public
-     * @return object
+     * @return integer
      */
-    public static function getStdClass()
+    public function getZero()
     {
-        return new \stdClass();
+        return 0;
     }
 }
